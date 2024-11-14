@@ -1,7 +1,6 @@
-import { Form, Input, Modal } from "antd";
-import { useModal } from "../hooks/useModal";
+import { Form, Input } from "antd";
 
-export function Login(){
+export function LoginForm(){
 
     type FieldType = {
         email: string
@@ -10,7 +9,7 @@ export function Login(){
 
     return(
         <Form>
-        <Form.Item<FieldType> rules={[{required: true, message: "Ведите e-mail"}]}>
+            <Form.Item<FieldType> rules={[{required: true, message: "Ведите e-mail"}]}>
                 <Input placeholder="E-mail"/>
             </Form.Item >
 
