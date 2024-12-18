@@ -4,41 +4,39 @@ import { useState } from "react";
 
 const { Paragraph } = Typography;
 
-export function RightSideBar(){
+type RightSideProps = {
+    descriptions?: string[]
+}
+
+export function RightSideBar({ descriptions }: RightSideProps){
 
     const [clickTriggerStr, setClickTriggerStr] = useState('werwer'); 
 
     return(
-        <div className="bg-transparent my-7 justify-center" >
+        <div className="bg-transparent justify-center flex flex-col items-center text-center w-full p-4" >
 
-            <div className="my-5">
-                <p className="text-center text-white">Описание</p>
-                <Card className="mx-5 my-3 border-white bg-transparent max-h-fit">
-                    <Paragraph key="ph1" editable={{ onChange: setClickTriggerStr, triggerType: ['text'] }} className="text-white py-1">
-                        {clickTriggerStr}
-                    </Paragraph>
-                </Card>
-            </div>
-            
-            <div className="my-5">
-                <p className="text-center text-white">Спикеры</p>
-                <Card className="mx-5 my-3 border-white bg-transparent max-h-fit">
-                    <Paragraph key="ph2" editable={{ onChange: setClickTriggerStr, triggerType: ['text'] }} className="text-white py-1">
-                        {clickTriggerStr}
-                    </Paragraph>
-                </Card> 
-            </div>
+            <p className="text-white">Описание</p>
+            <Card className="my-2 border-white min-h-fit w-full">
+                <Paragraph key="ph1" editable={{ onChange: setClickTriggerStr, triggerType: ['text'] }} className="text-gray-800 ">
+                    {clickTriggerStr}
+                </Paragraph>
+            </Card>
 
-            <div className="absolute bottom-4 w-full ">
-                <Card className="w-4/5 m-3" size="small">
-                    <Tabs>
-                        <TabPane tab="TXT" key="1"><Button type="primary" className="w-full">Скачать</Button></TabPane>
-                        <TabPane tab="DOC" key="2"><Button type="primary" className="w-full">Скачать</Button></TabPane>
-                        <TabPane tab="JSON" key="3"><Button type="primary" className="w-full">Скачать</Button></TabPane>
-                        <TabPane tab="PDF" key="4"><Button type="primary" className="w-full">Скачать</Button></TabPane>
-                    </Tabs>
-                </Card>  
-            </div>
+            <p className="text-white">Спикеры</p>
+             <Card className="my-2 border-white min-h-fit w-full"> 
+                <Paragraph key="ph2" editable={{ onChange: setClickTriggerStr, triggerType: ['text'] }} className="text-gray-800">
+                    {clickTriggerStr}
+                </Paragraph>
+             </Card>  
+
+            <Card className="max-w-full absolute bottom-4 flex flex-col justify-center items-center" size="small">
+                <Tabs>
+                    <TabPane tab="TXT" key="1"><Button type="primary" className="w-full">Скачать</Button></TabPane>
+                    <TabPane tab="DOC" key="2"><Button type="primary" className="w-full">Скачать</Button></TabPane>
+                    <TabPane tab="JSON" key="3"><Button type="primary" className="w-full">Скачать</Button></TabPane>
+                    <TabPane tab="PDF" key="4"><Button type="primary" className="w-full">Скачать</Button></TabPane>
+                </Tabs>
+            </Card>
    
         </div>
     )

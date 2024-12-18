@@ -1,16 +1,11 @@
 import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
-import { Button, Card, Form, Input, Select, TreeSelect } from "antd";
+import { Button, Card, Form, Input, Radio, Select, Switch, TreeSelect } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import TextArea from "antd/es/input/TextArea";
 import Dragger from "antd/es/upload/Dragger";
+import { Transcription } from "../lib/types";
 
-export function CreateTranscriptionForm(){
-
-    type Transcription = {
-        title: string
-        description: string,
-        speakersNumber: number
-    }
+export function CreateTranscription(){
 
     return(
         <Form className="min-w-full min-h-full">
@@ -28,7 +23,7 @@ export function CreateTranscriptionForm(){
 
             <Form.Item<Transcription> rules={[{required: true, message: "Введите название"}]}>
                 Название
-                <Input placeholder="Название" />
+                <Input placeholder="Название аудиофайла" defaultValue={"Название аудиофайла"} />
             </Form.Item>
 
             <Form.Item>
@@ -41,9 +36,9 @@ export function CreateTranscriptionForm(){
             </Form.Item>
 
 
-            <Form.Item<Transcription> >
-                Описание
-                <TextArea placeholder="Описание" />
+            <Form.Item<Transcription>>
+                 Описание 
+                <TextArea className="max-h-[300px]" placeholder="Описание" />
             </Form.Item>
 
 
@@ -53,9 +48,17 @@ export function CreateTranscriptionForm(){
                 </p>
             </Form.Item>
 
-            <Form.Item>
+            <Form.Item<Transcription>>
                  Язык оригинала
-                <Select />
+                 <Select defaultValue='rus' options={[{value: 'rus', label: 'Русский'}, {value: 'eng', label: 'English'}]}/>
+            </Form.Item>
+
+            <Form.Item<Transcription> label='Разбиение на спикеров'>
+                <Switch defaultChecked />
+            </Form.Item>
+
+            <Form.Item<Transcription> label='Количество спикеров'>
+                <Radio.Group size='small' optionType="button" options={[1, 2, 3, 4, 5, 6]} />
             </Form.Item>
         </Form>
     )

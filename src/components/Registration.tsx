@@ -1,6 +1,6 @@
-import { Form, Input, Modal } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 
-export function RegistrationForm(){
+export function Registration(){
 
     type TFieldType = {
         login: string
@@ -9,7 +9,7 @@ export function RegistrationForm(){
     }
     
     return(
-        <Form>
+        <Form >
             <Form.Item<TFieldType> rules={[{required: true, message: "Введите логин"}]}>
                 <Input placeholder="Логин" />
             </Form.Item>
@@ -20,6 +20,10 @@ export function RegistrationForm(){
 
             <Form.Item<TFieldType> rules={[{required: true, message: "Введите пароль"}]}>
                 <Input placeholder="Пароль"/>
+            </Form.Item>
+
+            <Form.Item>
+                <Button className="w-full" type="primary">Зарегистрироваться</Button>
             </Form.Item>
         </Form>
     )

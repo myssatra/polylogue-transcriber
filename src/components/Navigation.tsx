@@ -1,14 +1,17 @@
 import { Button, Menu, Modal } from "antd";
 import MenuItem from "antd/es/menu/MenuItem";
 import { useModal } from "../hooks/useModal";
-import { RegistrationForm } from "./RegistrationForm";
+import { Registration } from "./Registration";
 import { UserOutlined } from "@ant-design/icons";
-import { LoginForm } from "./LoginForm";
+import { Login } from "./Login";
+import { useState } from "react";
+import MockAdapter  from 'axios-mock-adapter'
 
 export function Navigation(){
     
     const [isShowingLog, toggleLog] = useModal() 
-    const [isShowingReg, toggleReg] = useModal() 
+    const [isShowingReg, toggleReg] = useModal()
+    const [data, setData] = useState(); 
 
     const isLogin = false;
 
@@ -34,7 +37,7 @@ export function Navigation(){
                 onCancel={toggleReg}
                 footer={[<Button className="w-full" type="primary">Зарегистрироваться</Button>]}
             >
-                <RegistrationForm/>
+                <Registration/>
             </Modal>
 
             <Modal 
@@ -43,7 +46,7 @@ export function Navigation(){
                 onCancel={toggleLog}
                 footer={[<Button className="w-full" type="primary">Войти</Button>]}
             >
-                <LoginForm/>
+                <Login />
             </Modal>
         </nav>
     )

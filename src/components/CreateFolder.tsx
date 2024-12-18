@@ -1,6 +1,6 @@
 import { Input } from "antd";
 
-export function CreateFolderForm(){
+export function CreateFolder(){
     return(
         <Input placeholder="название папки"></Input>
     )

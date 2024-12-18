@@ -1,49 +1,38 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Router, Routes } from 'react-router-dom';
 import './App.css';
 import { StartPage } from './pages/StartPage';
 import { Layout } from 'antd';
-import { Login } from './pages/Login';
 import { Workspace } from './pages/Workspace';
 import { UserEdit } from './pages/UserEdit';
+import { LoginPage } from './pages/LoginPage';
+import PrivateRoute from './store/PrivateRoute';
+import AuthProvider from './store/AuthProvider';
 
 function App() {
 
-  const isLogin = true;
+    // UserService.getUser(1).then((response) => {
+    //     const emily = response;
+      
+    //     // Логиним пользователя
+    //     UserService.loginUser(emily).then((response) => {
+    //       console.log(response.data);
+    //     })
+    //   }).then(console.log);
 
-  return (
-    <>
-        <Layout className="flex flex-col bg-zinc-800 p-0 h-screen items-center" >
-            {/* <Header className="flex p-0">
-                <Navigation />
-            </Header> */}
-            
-            {/* <Layout className="max-h-fit">
-                {isLogin &&
-                    <Sider className="bg-zinc-700 top-0 bottom-0 right-0 text-white" width={"15vw"}>
-                        <LeftSideBar />
-                    </Sider>
-                 }
-                
-
-                <Content className="flex-1 bg-zinc-800 p-10"> */}
-                  <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/startpage" element={<StartPage />} />
-                    <Route path="/" element={<Workspace />} />
-                    <Route path="/edit" element={<UserEdit />} />
-                  </Routes>
-                    
-                  {/* </Content>
-
-                {isLogin &&
-                    <Sider className="bg-zinc-700 top-0 bottom-0 right-0" width={"15vw"}>
-                        <RightSideBar />
-                    </Sider>
-                }
-                
-            </Layout> */}
+    return (
+        <Layout className="flex flex-col bg-zinc-800 p-0 items-center min-h-[100dvh]" >
+            <AuthProvider>
+                <Routes>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route  path='/' element={<PrivateRoute/>}>
+                        <Route path='/startPage' element={<StartPage/>}/>
+                        <Route path="/" element={<Workspace />} />
+                        <Route path="/edit" element={<UserEdit />} />
+                    </Route>
+                    {/* </AuthProvider> PrivateRoute element={<StartPage />} /> */}
+                </Routes>
+            </AuthProvider>
         </Layout>
-    </>
     );
 }
 
