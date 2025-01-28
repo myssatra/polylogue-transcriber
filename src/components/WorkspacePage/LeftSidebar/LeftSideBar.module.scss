@@ -1,0 +1,22 @@
+
+
+.contextMenu {
+    position: absolute;
+    // background: #fff;
+    width: calc(100% - 32px);
+    padding: 8px;
+    transform: translate(-50%, -100%);
+    left: 50%;
+
+    .contextItem {
+        cursor: pointer;
+        transition: 0.3s;
+    
+        &:hover {
+            background: rgba(0,0,0,0.1);
+        }
+        &:active {
+            background: rgba(0,0,0,0.2);
+        }
+    }
+}

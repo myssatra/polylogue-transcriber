@@ -1,39 +1,47 @@
-import { Route, Router, Routes } from 'react-router-dom';
+import { Route, Router, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import { StartPage } from './pages/StartPage';
-import { Layout } from 'antd';
-import { Workspace } from './pages/Workspace';
-import { UserEdit } from './pages/UserEdit';
-import { LoginPage } from './pages/LoginPage';
-import PrivateRoute from './store/PrivateRoute';
-import AuthProvider from './store/AuthProvider';
+import { ConfigProvider, Layout, Flex} from 'antd';
+import { Workspace } from './pages/WorkspacePage';
+import { UserEdit } from './pages/UserPage';
+import { AuthPage } from './pages/AuthPage';
+import { darkTheme, lightTheme } from './utils/theme';
+import { useEffect } from 'react';
+import UserService from './utils/services/UserService';
+import { observer } from 'mobx-react-lite';
+import { useAppStore } from './utils/contexts/AppStoreProvider';
 
-function App() {
 
-    // UserService.getUser(1).then((response) => {
-    //     const emily = response;
-      
-    //     // Логиним пользователя
-    //     UserService.loginUser(emily).then((response) => {
-    //       console.log(response.data);
-    //     })
-    //   }).then(console.log);
+const App = observer(() => {
+
+    const pathName = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(pathName.pathname === '/login')
+            return;
+
+        if(!UserService.isTokenValid()) {
+            navigate('/login');
+        }
+
+    }, [pathName])
+
+    const appStore = useAppStore();
+
+    // const IS_THEME_DARK = useSelector((state: any) => state.IS_THEME_DARK)
+
 
     return (
-        <Layout className="flex flex-col bg-zinc-800 p-0 items-center min-h-[100dvh]" >
-            <AuthProvider>
-                <Routes>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route  path='/' element={<PrivateRoute/>}>
-                        <Route path='/startPage' element={<StartPage/>}/>
-                        <Route path="/" element={<Workspace />} />
-                        <Route path="/edit" element={<UserEdit />} />
-                    </Route>
-                    {/* </AuthProvider> PrivateRoute element={<StartPage />} /> */}
-                </Routes>
-            </AuthProvider>
-        </Layout>
+        <ConfigProvider theme={appStore.THEME === false ? lightTheme : darkTheme}>
+            <Routes>
+                <Route path='/*' element={<AuthPage />} />
+                <Route path='/startPage' element={<StartPage/>}/>
+                <Route path="/workspace" element={<Workspace />} />
+                <Route path="/edit" element={<UserEdit />} />
+            </Routes>
+        </ConfigProvider>
     );
-}
+})
 
 export default App;

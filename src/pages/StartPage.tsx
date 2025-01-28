@@ -1,15 +1,14 @@
-import { Button, Card } from "antd"
-import { CreateTranscription } from "../components/CreateTranscription"
+import { Button, Card, Flex } from "antd"
+import { CreateTranscription } from "../components/WorkspacePage/CreateTranscription"
+import { observer } from "mobx-react-lite"
 
-export function StartPage (){
+export const StartPage = observer(() => {
     return(
-        <div className="flex justify-center content-center"> 
+        <Flex style={{width: '100%', justifyContent: 'space-between', flexGrow: '1'}}> 
             <Card className="m-10 w-1/3 h-fit">
                 <CreateTranscription />
                 <Button type="primary" className="w-full">Расшифровать</Button>
             </Card>
-        </div>
+        </Flex>
     )
-}
-
-export{}
+})
