@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Flex, FloatButton, Input, ConfigProvider, theme, Layout } from "antd";
+import { Avatar, Button, Card, Flex, Input, Layout } from "antd";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 

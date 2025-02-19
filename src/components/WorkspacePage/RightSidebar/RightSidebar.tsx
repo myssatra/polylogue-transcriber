@@ -12,7 +12,6 @@ import {
 } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { darkSideTheme, darkTheme, lightSideTheme, lightTheme } from "../../../utils/theme";
 import TranscriptionService from "../../../utils/services/TranscriptionService";
 import { Speaker } from "../../../utils/lib/types";

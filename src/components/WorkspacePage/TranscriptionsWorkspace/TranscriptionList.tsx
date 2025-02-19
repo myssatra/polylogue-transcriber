@@ -5,7 +5,8 @@ import TranscriptionService from '../../../utils/services/TranscriptionService'
 import { Line, Speaker, Transcription } from '../../../utils/lib/types'
 import { Bubble } from '@ant-design/x'
 import { CopyOutlined, ExclamationCircleFilled, ExclamationCircleOutlined } from '@ant-design/icons'
-
+import ReactPlayer from 'react-player'
+import trl from './TranscriptionsWorkspace.module.scss'
 
 {/* <Flex>
     {speakers
@@ -55,7 +56,7 @@ const [api, contextHolder] = notification.useNotification();
                         content={
                             <Flex vertical>
                                 {line.content}
-                                <Flex className='place-content-end'>
+                                <Flex>
                                     <Button className='justify-self-end'
                                         color="default" variant="text" size="small"
                                         icon={<CopyOutlined style={{color: '#8bc43b'}}/>}
@@ -63,6 +64,14 @@ const [api, contextHolder] = notification.useNotification();
                                             navigator.clipboard.writeText(line.content)
                                             openNotification();
                                             }}/>
+
+                                    <ReactPlayer className={trl.player} url={"tupayablyad.mp3"} 
+                                        controls={true}
+                                        playing={false}>
+                                            <Button>BLYAAA</Button>
+                                    </ReactPlayer>
+                                    
+
                                 </Flex>
                             </Flex>                                    
                         }

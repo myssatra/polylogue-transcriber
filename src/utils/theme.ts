@@ -9,8 +9,8 @@ export const lightTheme: ThemeConfig = {
   },
   components: {
    Button: {
-      primaryShadow: 'none',
-      colorBorder: 'none'
+      primaryShadow: 'transparent',
+      colorBorder: 'transparent'
    }
   }
 };
@@ -24,7 +24,7 @@ export const darkTheme: ThemeConfig = {
   },
   components: {
    Button: {
-      primaryShadow: 'none'
+      primaryShadow: 'transparent'
    }}
 };
 
@@ -44,7 +44,7 @@ export const lightSideTheme: ThemeConfig = {
       },
       Button: {
          colorBgContainer: '#FFFFFF',
-         primaryShadow: 'null'
+         primaryShadow: 'transparent'
       },
       Card: {
          colorBgContainer: '#FFFFFF'
@@ -66,7 +66,7 @@ export const darkSideTheme: ThemeConfig = {
       },
       Button: {
          colorBgContainer: '#2b2b2b',
-         defaultShadow: 'null'
+         defaultShadow: 'transparent'
       },
       Card: {
          colorBgContainer: '#2b2b2b'
