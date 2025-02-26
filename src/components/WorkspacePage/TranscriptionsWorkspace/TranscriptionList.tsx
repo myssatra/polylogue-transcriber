@@ -65,12 +65,7 @@ const [api, contextHolder] = notification.useNotification();
                                             openNotification();
                                             }}/>
 
-                                    <ReactPlayer className={trl.player} url={"tupayablyad.mp3"} 
-                                        controls={true}
-                                        playing={false}>
-                                            <Button>BLYAAA</Button>
-                                    </ReactPlayer>
-                                    
+                                    {/* Audiolayer */}
 
                                 </Flex>
                             </Flex>                                    

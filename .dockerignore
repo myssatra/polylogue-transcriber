@@ -1,0 +1,14 @@
+# Исключить node_modules
+node_modules/
+
+# Исключить папку build
+build/
+
+.git/
+
+# Исключить служебные файлы
+# Dockerfile
+# docker-compose.yml
+package-lock.json
+.gitignore
+README.md
