@@ -6,8 +6,8 @@ import TranscriptionService from "../utils/services/TranscriptionService";
 import { RightSidebar } from "../components/WorkspacePage/RightSidebar/RightSidebar";
 import { LeftSidebar } from "../components/WorkspacePage/LeftSidebar/LeftSidebar";
 import { observer } from "mobx-react-lite";
-import { TranscriptionsList } from "../components/WorkspacePage/TranscriptionsWorkspace/TranscriptionsWorkspace";
 import { useAppStore } from "../utils/contexts/AppStoreProvider";
+import { TranscriptionsList } from "../components/WorkspacePage/TranscriptionsWorkspace/TranscriptionsWorkspace";
 
 export const Workspace = observer(() => {
 

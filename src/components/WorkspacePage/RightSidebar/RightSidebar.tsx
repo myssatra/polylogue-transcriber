@@ -8,7 +8,8 @@ import {
   Tabs,
   Typography,
   theme,
-  Layout
+  Layout,
+  Affix
 } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import { useEffect, useState } from "react";
@@ -30,6 +31,9 @@ export const  RightSidebar = observer(({ descriptions }: RightSidebarProps) =>  
   const appStore = useAppStore();
   const [speakers, setSpeakers] = useState<Speaker[]>([]);
 
+  const [rows, setRows] = useState(2);
+  const [expanded, setExpanded] = useState(false);
+
   useEffect(() => {
     (async () => {
       const speakers = await TranscriptionService.getSpeakers();
@@ -43,13 +47,20 @@ export const  RightSidebar = observer(({ descriptions }: RightSidebarProps) =>  
         <Layout style={{display: 'flex', flexDirection: 'column'}} className="w-full" >
           <Flex vertical className="pb-1">
             {/* <Typography.Text strong className="pb-2">Описание</Typography.Text> */}
-            <Card title='Описание' className="min-h-fit w-full p-3" size="small">
-              <Paragraph style={{marginBottom: '0px', opacity: '70%'}}
+            <Card title='Описание' className="min-h-fit w-full p-3 overflow-hidden" size="small">
+              <Typography.Paragraph style={{marginBottom: '0px', opacity: '70%'}} className="overflow-hidden max-h-[100px]"
                   key="ph1"
+                  ellipsis={{
+                    rows,
+                    expandable: 'collapsible',
+                    expanded,
+                    onExpand: (_, info) => setExpanded(info.expanded),
+                  }}
+                  copyable
                   editable={{ onChange: setClickTriggerStr, triggerType: ["text"]}}
               >
                   {clickTriggerStr ==='' ? 'Добавить описание...' : clickTriggerStr}
-              </Paragraph>
+              </Typography.Paragraph>
             </Card>
           </Flex>
 
@@ -69,6 +80,7 @@ export const  RightSidebar = observer(({ descriptions }: RightSidebarProps) =>  
           </Flex>
         </Layout>
 
+        <Affix offsetBottom={10}>
         <Card className="msin-w-fit flex flex-col justify-center items-center">
           <Tabs>
             <TabPane tab="TXT" key="1">
@@ -93,6 +105,9 @@ export const  RightSidebar = observer(({ descriptions }: RightSidebarProps) =>  
             </TabPane>
           </Tabs>
         </Card>
+        </Affix>
+
+
       </Layout>
     </ConfigProvider>
   );

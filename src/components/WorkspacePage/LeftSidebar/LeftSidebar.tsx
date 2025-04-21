@@ -7,16 +7,11 @@ import {
   Avatar,
   Button,
   Card,
-  Divider,
   Flex,
-  GetProps,
   Modal,
   Space,
   Switch,
-  Tree,
   Typography,
-  theme,
-  Tag,
   Layout,
 } from "antd";
 import { useModal } from "../../../utils/hooks/useModal";
@@ -29,7 +24,7 @@ import { useEffect, useState, useRef } from "react";
 import { FoldersTree } from "../FoldersTree";
 import lsb from './LeftSideBar.module.scss'
 import {ConfigProvider} from 'antd'
-import { darkSideTheme, darkTheme, lightSideTheme, lightTheme } from "../../../utils/theme";
+import { darkSideTheme, lightSideTheme } from "../../../utils/theme";
 import { useAppStore } from "../../../utils/contexts/AppStoreProvider";
 import { observer } from 'mobx-react-lite';
 

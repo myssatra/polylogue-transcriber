@@ -1,21 +1,11 @@
-import { Button, Flex, Input, Layout, notification, Space } from 'antd'
+import { Affix, Button, Card, Flex, Input, Layout, notification, Space } from 'antd'
 import { observer } from 'mobx-react-lite'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import TranscriptionService from '../../../utils/services/TranscriptionService'
 import { Line, Speaker, Transcription } from '../../../utils/lib/types'
 import { Bubble } from '@ant-design/x'
 import { CopyOutlined, ExclamationCircleFilled, ExclamationCircleOutlined } from '@ant-design/icons'
-import ReactPlayer from 'react-player'
-import trl from './TranscriptionsWorkspace.module.scss'
-
-{/* <Flex>
-    {speakers
-    .filter(speaker => speaker.id === line.speakerId)
-    .map(speaker => (
-        // <Input key={speaker.id} defaultValue={speaker.name}></Input>
-    ))}
-</Flex> */}
-
+import { CustomPlayer } from './CustomPlayer'
 
 
 export const TranscriptionList = observer (() => {
@@ -43,12 +33,12 @@ const [api, contextHolder] = notification.useNotification();
     },[])
 
     return(
-        <Layout>
+        <Layout id='container' className='w-full h-[100%]' style={{position: 'relative'}}>
             {contextHolder}
-            <Flex vertical>
+            <Flex vertical className='border border-gray-300 rounded-lg px-[20px] py-[10px]' style={{height: '95vh', overflowY: 'scroll'}} >
                 {transcription != null &&
-                    lines.map( line =>
-                    <Bubble className='p-3' key={line.speakerId}
+                    lines.map(line =>
+                    <Bubble className='py-[5px]' key={line.speakerId}
                         header={speakers
                         .filter(speaker => speaker.id === line.speakerId)
                         .map(speaker => speaker.name)}
@@ -64,15 +54,21 @@ const [api, contextHolder] = notification.useNotification();
                                             navigator.clipboard.writeText(line.content)
                                             openNotification();
                                             }}/>
-
-                                    {/* Audiolayer */}
-
                                 </Flex>
                             </Flex>                                    
                         }
                     /> 
                 )}
             </Flex>
+                
+                
+            <Affix offsetBottom={0} target={() => document.getElementById('container')}
+                className='mt-[10px]'>
+                    <Flex className='border border-gray-300 rounded-lg '>
+                <CustomPlayer url={"tupayablyad.mp3"} />
+                </Flex>
+            </Affix>
+
         </Layout>
     )
 })
