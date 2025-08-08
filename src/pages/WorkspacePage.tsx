@@ -11,25 +11,24 @@ import { TranscriptionsList } from "../components/WorkspacePage/TranscriptionsWo
 export const Workspace = observer(() => {
 
   const [authUser, setAuthUser] = useState<User | null>(null);
-  const [transcriptions, setTranscriptions] = useState<Transcription[] | null>(
-    null
-  );
+  const [transcriptions, setTranscriptions] = useState<Transcription[] | null>(null);
+  const [userUserTranscripts, setUserTranscripts] = useState<Transcription[] | null>(null);
 
 
   const [isFirstUseEffect, setIsFirstUseEffect] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const authUser: User = await UserService.getAuthUser();
-        console.log("userId", authUser.id);
-        setAuthUser(authUser);
-        setIsFirstUseEffect(true);
-      } catch (error) {
-        console.log("auth error:", error);
-      }
-    })();
-  }, []);
+    useEffect(() => {
+      (async () => {
+        try {
+          const authUser: User = await UserService.getAuthUser();
+          console.log("userId", authUser.id);
+          setAuthUser(authUser);
+          setIsFirstUseEffect(true);
+        } catch (error) {
+          console.log("auth error:", error);
+        }
+      })();
+    }, []);
 
   useEffect(() => {
     if (isFirstUseEffect) {
@@ -37,9 +36,26 @@ export const Workspace = observer(() => {
         try {
           const transcriptions: Transcription[] | null = (
             await TranscriptionService.getTranscriptions()
-          ).filter((t) => t.creatorId == authUser?.id);
+          ).filter((t) => t.owner_id == authUser?.id);
           setTranscriptions(transcriptions);
-          console.log("users transcriptions", transcriptions);
+          console.log("users transcripts", userUserTranscripts);
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+    }
+  }, [isFirstUseEffect]);
+
+    useEffect(() => {
+    if (isFirstUseEffect) {
+      (async () => {
+        try {
+          const transcripts: Transcription[] | null = (
+            await TranscriptionService.getUserTranscriptions()
+          ).filter((t) => t.owner_id == authUser?.id);
+          setUserTranscripts(transcripts);
+          console.log();
+          console.log("users transcriptions", transcripts);
         } catch (error) {
           console.log(error);
         }

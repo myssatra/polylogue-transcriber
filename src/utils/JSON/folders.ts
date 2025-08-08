@@ -1,20 +1,20 @@
-import { Folder } from "../lib/types";
+import { Directory } from "../lib/types";
 
-const folders : Folder[] = [
+const directory : Directory[] = [
     {
         id: 1,
-        title: "Folder1",
-        transcriptionsIds: [1, 2]
+        name: "Folder1",
+        //transcriptionsIds: [1, 2]
     },
     {
         id: 2,
-        title: "Folder2",
-        transcriptionsIds: [3]
+        name: "Folder2",
+        //transcriptionsIds: [3]
     },
     {
         id: 3,
-        title: "Folder3"
+        name: "Folder3"
     }
 ]
 
-export default folders;
+export default directory;

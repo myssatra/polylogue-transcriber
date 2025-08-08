@@ -25,5 +25,5 @@ export const emilysTranscription: Transcription = {
         { id: 10, speakerId: 1, transcriptionId: 1, content: "The final line wraps up the transcription, with the first speaker concluding the discussion and thanking the participants for their contributions." }
     ],
     language: "en",
-    creatorId: 1
+    owner_id: 1
 }

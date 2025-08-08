@@ -3,7 +3,7 @@ import { Button, Form, Input, message, Radio, Select, Switch, UploadFile } from 
 import FormItem from "antd/es/form/FormItem";
 import TextArea from "antd/es/input/TextArea";
 import Dragger from "antd/es/upload/Dragger";
-import { Transcription } from "../../utils/lib/types";
+import { Directory, Transcription } from "../../utils/lib/types";
 import { useEffect, useRef, useState } from "react";
 import TranscriptionService from "../../utils/services/TranscriptionService";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
@@ -28,6 +28,7 @@ export function CreateTranscription(){
     const [isRecordingStopped, setIsRecordingStopped] = useState<boolean>(false);
     
     const[folders, setFolders] = useState<Folder[]>([]);
+    const[directories, setDirectories] = useState<Directory[]>([]);
 
     const recorderControls = useAudioRecorder()
 
@@ -55,19 +56,27 @@ export function CreateTranscription(){
 
     }
 
-    useEffect(() => {
-        (async() => {
-            const folders = await TranscriptionService.getFolders(); 
-            setFolders(folders);
-            //console.log(options);
-        })()
-    }, [])
+    // useEffect(() => {
+    //     (async() => {
+    //         const folders = await TranscriptionService.getUserDirectories(); 
+    //         setFolders(folders);
+    //         //console.log(options);
+    //     })()
+    // }, [])
 
     const options = folders.map(folder => ({
         value: folder.id,
         label: folder.title
     }))
     
+    useEffect(() => {
+        (async() => {
+            const directories = await TranscriptionService.getUserDirectories(); 
+            setDirectories(directories);
+            console.log('directories',directories);
+        })()
+    }, [])
+
     
     return(
         <Form className="min-w-full min-h-full">

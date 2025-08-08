@@ -8,7 +8,7 @@ import { speakers } from '../JSON/speakers'
 import { emilysTranscription } from '../JSON/transcription';
 
 const testApi = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'http://localhost:8000'
 })
 const mock = new MockAdapter(testApi);
 

@@ -8,12 +8,10 @@ import { CustomPlayer } from './CustomPlayer'
 import { useAppStore } from '../../../../utils/contexts/AppStoreProvider'
 import Animate from 'rc-animate';
 import { NULL } from 'sass'
+import TranscriptionService from '../../../../utils/services/TranscriptionService'
 
 
 export const TranscriptionList = observer (() => {
-    // const [transcription, setTranscription] = useState<Transcription | null>(null);
-    // const [lines, setLines] = useState<Line[]>([]);
-    // const [speakers, setSpeakers] = useState<Speaker[]>([]);
     const [api, contextHolder] = notification.useNotification();
 
     const appStore = useAppStore();
@@ -32,16 +30,6 @@ export const TranscriptionList = observer (() => {
             icon: <ExclamationCircleFilled style={{color: '#8bc43b', fontSize: '70%'}}/>
         }) 
     }
-
-    // useEffect(() => {
-    //     (async() => {
-    //         const transcription = await TranscriptionService.getEmilysTranscription();
-    //         setTranscription(transcription);
-    //         setLines(transcription? transcription.lines : []);
-    //         setSpeakers(transcription.speakers);
-    //         console.log('lines: : ',transcription.lines)
-    //     })()
-    // },[])
 
     return(
         <Layout id='container' className='relative w-full h-[100%]'>

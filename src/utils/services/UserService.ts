@@ -4,14 +4,14 @@ import { User } from "../lib/types";
 import { AxiosResponse } from "axios";
 
 type AuthResponse = {
-    id: number,
+    // id: number,
     username: string,
     email: string,
-    firstName: string,
-    lastName: string,
-    gender: string,
-    accessToken: string,
-    refreshToken: string
+    // firstName: string,
+    // lastName: string,
+    // gender: string,
+    access_token: string,
+    refresh_token: string
 }
 
 type RefreshAuthResponse = {
@@ -20,38 +20,43 @@ type RefreshAuthResponse = {
 }
 
 
-
 const loginUser = (username: string, password:  string): Promise<AuthResponse> => {
     return http.post<any>(
-        '/user/login', 
+        '/auth/login', 
         {
-            "username": username,
+            "email": username,
             "password": password,
         }).then(resp => {
             const authResponse: AuthResponse = resp.data;
-            console.log(authResponse.accessToken)
-            setAccessToken(authResponse.accessToken);
-            setRefreshToken(authResponse.refreshToken);
+            console.log(authResponse.access_token)
+            setAccessToken(authResponse.access_token);
+            setRefreshToken(authResponse.refresh_token);
             return authResponse;
         } )
 }
 
-const logoutUser = () => {
+const logoutUser = async () => {
+    const tokens = {
+        access_token: getAccessToken(),
+        refresh_token: getRefreshToken(),
+    };
+
+    await http.post('auth/logout', tokens);
     setAccessToken(null);
-    setRefreshToken(null);
+    setRefreshToken(null)
 }
 
 
 const getUser = async (id: number): Promise<User> => {
     const response: AxiosResponse<User> = await http.get<User>(
-        `/user/${id}`
+        `/auth/${id}`
     )
     return response.data;
 }
 
 const getAuthUser = async (): Promise<User> => {
     const authUser = await http.get<User>(
-        '/auth/me',
+        '/users/me',
     )        
     return authUser.data;
 }
@@ -73,15 +78,18 @@ const setRefreshToken = (token: string | null) => {
 }  
 
 const refreshAuthToken = async (): Promise<RefreshAuthResponse> => {
-    const response = await http.get<RefreshAuthResponse>(
-        '/auth/refresh',{
-            data: {
-                //refreshToken: getRefreshToken(),
-                expiresInMins: 30
-            }
-        }
-    )
-    console.log('refreshresp:', response)
+    const currentToken = {
+        accessToke: getAccessToken(),
+        refreshToken: getRefreshToken()
+    };
+    const response = await http.post<RefreshAuthResponse>(
+        'auth/tokens/access',
+        currentToken
+    );
+
+    setAccessToken(response.data.accessToken);
+    setRefreshToken(response.data.refreshToken);
+
     return response.data;
 }
 

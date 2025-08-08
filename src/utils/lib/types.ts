@@ -10,7 +10,7 @@ export type Transcription = {
     speakers: Speaker[],
     lines: Line[],
     language: string,
-    creatorId: number
+    owner_id: number
 }
 
 export type Line = {
@@ -24,6 +24,8 @@ export type Line = {
 export type Speaker = {
     id: number,
     name: string,
+    // owner_id: number,
+    // is_deleted: boolean,
     // lines?: Line[]
 }
 
@@ -35,10 +37,17 @@ export type User = {
     //transriptionIds?: number[]
 }
 
-export type Folder = {
+export type UserRole = {
+    user_id: number,
+    role_id: number,
     id: number,
-    title: string,
-    transcriptionsIds?: number[]
+    is_deleted: boolean
+}
+
+export type Directory = {
+    id: number,
+    name: string,
+    //transcriptionsIds?: number[]
 }
 
 export type ChatMessage = {
@@ -54,8 +63,12 @@ export type AIchat = {
     messages: ChatMessage[]
 }
 
-// get api/folders
-// FolderList
+export type Treeview = {
+    directories: Directory[]
+}
+
+// get api/Directorys
+// DirectoryList
 // id
 // name
 // transcriptionList: TranscriptionPreview

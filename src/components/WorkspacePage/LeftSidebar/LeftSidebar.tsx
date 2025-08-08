@@ -18,7 +18,7 @@ import { useModal } from "../../../utils/hooks/useModal";
 import { CreateTranscription } from "../CreateTranscription";
 import { CreateFolder } from "../CreateFolder";
 import { useNavigate } from "react-router-dom";
-import { User } from "../../../utils/lib/types";
+import { Treeview, User } from "../../../utils/lib/types";
 import UserService from "../../../utils/services/UserService";
 import { useEffect, useState, useRef } from "react";
 import { FoldersTree } from "../FoldersTree";
@@ -28,6 +28,7 @@ import { darkSideTheme, lightSideTheme } from "../../../utils/theme";
 import { useAppStore } from "../../../utils/contexts/AppStoreProvider";
 import { observer } from 'mobx-react-lite';
 import { AudioRecorder } from "react-audio-voice-recorder";
+import TranscriptionService from "../../../utils/services/TranscriptionService";
 
 type Transcription = {
   id: number;
@@ -50,10 +51,24 @@ export const LeftSidebar = observer( ({ authUser, transriptions }: LeftSidebarPr
   const [isShowingAddTrans, toggleAddTrans] = useModal();
   const [isShowingAddFordel, toggleAddFolder] = useModal();
 
+  // тест дерева
+  const [treeview, setTreeView] = useState<Treeview>();
+
+  useEffect(() => {
+  (async () => {
+      // const authUser: User = await UserService.getAuthUser();
+      // console.log("userId", authUser.id);
+      const treeview = await TranscriptionService.getUserTreeview();
+      setTreeView(treeview);
+      console.log('treeview test:', treeview)
+  })();
+}, []);
+
+
+
   const navigate = useNavigate(); 
   const appStore = useAppStore();
   const contextRef = useRef<HTMLInputElement>(null);
-  const [show, setShow] = useState(false);
 
   const handleClickOutsideContextMenu = (event: any) => {
     if (contextRef.current && !contextRef.current.contains(event.target))

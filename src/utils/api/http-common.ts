@@ -4,7 +4,7 @@ import { error } from 'console';
 
 // Создаем экземпляр Axios
 const http = axios.create({
-  baseURL: 'https://dummyjson.com',
+  baseURL: 'http://localhost:8000/api/v0',
   headers: {
     'Content-type': 'application/json',
   },

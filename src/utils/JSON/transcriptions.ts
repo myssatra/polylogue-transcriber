@@ -26,7 +26,7 @@ const transcriptions: Transcription[] = [
       { id: 10, speakerId: 1, transcriptionId: 1, content: "To wrap up, I conclude our discussion by summarizing the key insights and thanking all participants for their valuable contributions. This has been a productive session, and I appreciate everyone’s input." },
     ],
     language: "en",
-    creatorId: 1,
+    owner_id: 1,
   },
   {
     id: 2,
@@ -53,7 +53,7 @@ const transcriptions: Transcription[] = [
       { id: 10, speakerId: 1, transcriptionId: 2, content: "To wrap up, the future of software engineering is about smarter tools and better collaboration. Thank you all for joining us today to discuss these exciting advancements!" },
     ],
     language: "en",
-    creatorId: 1,
+    owner_id: 1,
   },
   {
     id: 3,
@@ -80,7 +80,7 @@ const transcriptions: Transcription[] = [
       { id: 10, speakerId: 2, transcriptionId: 3, content: "Keep learning, stay curious, and don’t shy away from tackling hard problems. Persistence and a growth mindset will lead you to success. Thanks for the great questions!" },
     ],
     language: "en",
-    creatorId: 1,
+    owner_id: 1,
   },
   {
     id: 4,
@@ -107,7 +107,7 @@ const transcriptions: Transcription[] = [
       { id: 10, speakerId: 3, transcriptionId: 4, content: "Thank you both for these insightful points! This discussion has highlighted critical aspects of AI’s ethical and technical landscape. We appreciate your contributions." },
     ],
     language: "en",
-    creatorId: 1,
+    owner_id: 1,
   },
   {
     id: 5,
@@ -134,7 +134,7 @@ const transcriptions: Transcription[] = [
       { id: 10, speakerId: 1, transcriptionId: 5, content: "Excellent work, team. Let’s finalize this plan, assign responsibilities, and start execution promptly. Thank you all for your valuable input and commitment!" },
     ],
     language: "en",
-    creatorId: 1,
+    owner_id: 1,
   },
 ];
 
