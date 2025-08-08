@@ -3,169 +3,139 @@ import { Transcription } from "../lib/types";
 const transcriptions: Transcription[] = [
   {
     id: 1,
-    title: "Interview with John Doe",
-    description: "An interview with John Doe about his latest book.",
+    title: "Sample Transcription",
+    key: "1-1",
+    description: "This sample transcription features three speakers discussing a topic in depth. Segmented into multiple lines, it captures diverse insights, questions, and responses, showcasing a dynamic and collaborative dialogue for clear representation in structured formats.",
     isSegmented: true,
-    speakersQuantity: 2,
+    speakersQuantity: 3,
     speakers: [
-      { id: 1, name: "Interviewer" },
-      { id: 2, name: "John Doe" }
+      { id: 1, name: "Speaker 1" },
+      { id: 2, name: "Speaker 2" },
+      { id: 3, name: "Speaker 3" },
     ],
     lines: [
-      { id: 1, speakerId: 1, transcriptionId: 1, content: "Welcome to the show, John." },
-      { id: 2, speakerId: 2, transcriptionId: 1, content: "Thank you for having me." }
+      { id: 1, speakerId: 1, transcriptionId: 1, content: "This is the first line of the transcription, introducing the topic we will discuss today. Our goal is to explore various perspectives and share insights on the subject matter in a collaborative manner." },
+      { id: 2, speakerId: 2, transcriptionId: 1, content: "The second line continues our discussion, diving deeper into the key points. I’ll provide detailed insights and examples to highlight the main arguments and ensure everyone understands the context clearly." },
+      { id: 3, speakerId: 3, transcriptionId: 1, content: "In this third line, I’m joining the conversation to add my unique perspective. I aim to contribute additional opinions and ideas that complement what’s been said so far and push the discussion forward." },
+      { id: 4, speakerId: 1, transcriptionId: 1, content: "In the fourth line, I respond to previous comments, clarifying some points raised earlier. I’ll also introduce new ideas to keep the conversation dynamic and ensure we cover all relevant aspects thoroughly." },
+      { id: 5, speakerId: 2, transcriptionId: 1, content: "Here, I elaborate on my earlier statements, providing concrete examples and evidence to support my arguments. My goal is to strengthen the discussion with data and practical insights for better understanding." },
+      { id: 6, speakerId: 3, transcriptionId: 1, content: "I’m interjecting with a question to seek clarification on a specific point made earlier. My aim is to ensure we’re all aligned and to deepen our understanding of the topic through focused inquiry." },
+      { id: 7, speakerId: 1, transcriptionId: 1, content: "I’m answering the question with a detailed explanation, offering additional context to help everyone grasp the topic better. My response aims to address all concerns and provide a comprehensive overview." },
+      { id: 8, speakerId: 2, transcriptionId: 1, content: "I agree with the explanation provided and want to add my own thoughts to enrich the discussion. By building on previous points, I hope to contribute valuable perspectives and keep the conversation engaging." },
+      { id: 9, speakerId: 3, transcriptionId: 1, content: "In this line, I summarize the key points discussed so far, highlighting the main takeaways. My goal is to ensure everyone is on the same page and to emphasize the most critical aspects of our conversation." },
+      { id: 10, speakerId: 1, transcriptionId: 1, content: "To wrap up, I conclude our discussion by summarizing the key insights and thanking all participants for their valuable contributions. This has been a productive session, and I appreciate everyone’s input." },
     ],
-    language: "English",
-    creatorId: 1
+    language: "en",
+    creatorId: 1,
   },
   {
     id: 2,
     title: "Tech Conference Keynote",
-    description: "Keynote speech from the annual tech conference.",
+    key: "1-2",
+    description: "Keynote speech from the annual Tech Conference, discussing innovations in software engineering.",
     isSegmented: true,
-    speakersQuantity: 1,
+    speakersQuantity: 3,
     speakers: [
-      { id: 1, name: "Keynote Speaker" }
+      { id: 1, name: "Keynote Speaker" },
+      { id: 2, name: "Moderator" },
+      { id: 3, name: "Guest Speaker" },
     ],
     lines: [
-      { id: 1, speakerId: 1, transcriptionId: 2, content: "Good morning everyone, welcome to the conference." }
+      { id: 1, speakerId: 1, transcriptionId: 2, content: "Welcome to the Tech Conference! Today, we’ll explore the exciting future of software engineering, focusing on how emerging technologies are shaping the industry and driving innovation forward." },
+      { id: 2, speakerId: 2, transcriptionId: 2, content: "Thank you for the warm introduction. Can you share the key trends we’re seeing this year in software engineering, and how they’re impacting developers and organizations globally?" },
+      { id: 3, speakerId: 3, transcriptionId: 2, content: "Absolutely, we’re witnessing a significant rise in AI-driven development tools that enhance productivity and streamline coding processes across various software development projects." },
+      { id: 4, speakerId: 1, transcriptionId: 2, content: "That’s correct. AI is fundamentally transforming how we write, test, and deploy code, enabling developers to create more efficient and reliable software solutions in less time." },
+      { id: 5, speakerId: 2, transcriptionId: 2, content: "Could you provide a specific example of an AI-driven tool that’s making a significant impact in the software development industry and explain how it’s being utilized?" },
+      { id: 6, speakerId: 3, transcriptionId: 2, content: "Tools like Copilot are revolutionizing coding by offering real-time suggestions and automating repetitive tasks, significantly speeding up the development process for programmers." },
+      { id: 7, speakerId: 1, transcriptionId: 2, content: "We’re also seeing advanced collaboration platforms that support remote teams, enabling seamless communication and coordination across distributed software development projects." },
+      { id: 8, speakerId: 2, transcriptionId: 2, content: "How do these collaboration platforms integrate with existing development workflows, and what benefits do they bring to teams working on complex software projects?" },
+      { id: 9, speakerId: 3, transcriptionId: 2, content: "They integrate seamlessly with IDEs and CI/CD pipelines, improving efficiency by automating workflows and ensuring smooth collaboration among developers across the globe." },
+      { id: 10, speakerId: 1, transcriptionId: 2, content: "To wrap up, the future of software engineering is about smarter tools and better collaboration. Thank you all for joining us today to discuss these exciting advancements!" },
     ],
-    language: "English",
-    creatorId: 1
+    language: "en",
+    creatorId: 1,
   },
   {
     id: 3,
-    title: "Panel Discussion on AI",
-    description: "A panel discussion on the future of artificial intelligence.",
+    title: "Interview with John Doe",
+    key: "1-3",
+    description: "An in-depth interview with John Doe, discussing his journey in the tech industry.",
     isSegmented: true,
-    speakersQuantity: 4,
+    speakersQuantity: 3,
     speakers: [
-      { id: 1, name: "Moderator" },
-      { id: 2, name: "AI Expert 1" },
-      { id: 3, name: "AI Expert 2" },
-      { id: 4, name: "AI Expert 3" }
+      { id: 1, name: "Interviewer" },
+      { id: 2, name: "John Doe" },
+      { id: 3, name: "Co-Interviewer" },
     ],
     lines: [
-      { id: 1, speakerId: 1, transcriptionId: 3, content: "Let's start the discussion." },
-      { id: 2, speakerId: 2, transcriptionId: 3, content: "AI is the future." }
+      { id: 1, speakerId: 1, transcriptionId: 3, content: "John, thank you for joining us today. Can you share your background and tell us how you got started in the tech industry and what inspired your career path?" },
+      { id: 2, speakerId: 2, transcriptionId: 3, content: "Thanks for having me! I began as a developer 15 years ago, driven by a passion for technology and a desire to create solutions that make a real difference in people’s lives." },
+      { id: 3, speakerId: 3, transcriptionId: 3, content: "What inspired you to enter the tech field, and were there any specific moments or experiences that shaped your decision to pursue a career in technology?" },
+      { id: 4, speakerId: 2, transcriptionId: 3, content: "I was fascinated by how software can solve real-world problems, from automating tasks to connecting people globally. That potential for impact motivated me to dive into tech." },
+      { id: 5, speakerId: 1, transcriptionId: 3, content: "You’ve worked on some impressive projects over the years. Can you highlight one that stands out and share what made it particularly significant for your career?" },
+      { id: 6, speakerId: 2, transcriptionId: 3, content: "Sure, I led a team to build a scalable cloud platform that supported thousands of users, a project that taught me the importance of robust architecture and teamwork." },
+      { id: 7, speakerId: 3, transcriptionId: 3, content: "What were some of the biggest challenges you faced during that cloud platform project, and how did you and your team overcome them to ensure its success?" },
+      { id: 8, speakerId: 2, transcriptionId: 3, content: "The biggest challenge was ensuring zero downtime during deployment, which we achieved through careful planning, rigorous testing, and implementing a phased rollout strategy." },
+      { id: 9, speakerId: 1, transcriptionId: 3, content: "That’s impressive! What advice would you give to new developers starting their careers in tech, especially those aiming to work on impactful projects like yours?" },
+      { id: 10, speakerId: 2, transcriptionId: 3, content: "Keep learning, stay curious, and don’t shy away from tackling hard problems. Persistence and a growth mindset will lead you to success. Thanks for the great questions!" },
     ],
-    language: "English",
-    creatorId: 1
+    language: "en",
+    creatorId: 1,
   },
   {
     id: 4,
-    title: "Podcast Episode 1",
-    description: "First episode of the tech podcast.",
+    title: "Panel Discussion on AI",
+    key: "2-1",
+    description: "A panel discussion exploring the ethical and technical aspects of artificial intelligence.",
     isSegmented: true,
     speakersQuantity: 3,
     speakers: [
-      { id: 1, name: "Host" },
-      { id: 2, name: "Guest 1" },
-      { id: 3, name: "Guest 2" }
+      { id: 1, name: "Panelist 1" },
+      { id: 2, name: "Panelist 2" },
+      { id: 3, name: "Moderator" },
     ],
     lines: [
-      { id: 1, speakerId: 1, transcriptionId: 4, content: "Welcome to the podcast." },
-      { id: 2, speakerId: 2, transcriptionId: 4, content: "Thanks for having us." }
+      { id: 1, speakerId: 3, transcriptionId: 4, content: "Welcome to our AI panel discussion. Let’s start by exploring the critical topic of ethics in artificial intelligence and its implications for society and technology development." },
+      { id: 2, speakerId: 1, transcriptionId: 4, content: "Ethics is paramount in AI. We must ensure that AI systems don’t amplify existing biases in data, which could lead to unfair outcomes and harm marginalized communities." },
+      { id: 3, speakerId: 2, transcriptionId: 4, content: "I agree, but we also need to balance innovation with regulation to ensure AI advances responsibly without stifling creativity or slowing down technological progress." },
+      { id: 4, speakerId: 3, transcriptionId: 4, content: "How can we effectively address bias in AI training datasets to create fairer and more equitable systems, and what practical steps can developers take to achieve this?" },
+      { id: 5, speakerId: 1, transcriptionId: 4, content: "We need to audit datasets regularly and involve diverse teams in the development process to identify and mitigate biases early, ensuring AI systems are fair and inclusive." },
+      { id: 6, speakerId: 2, transcriptionId: 4, content: "Transparent algorithms are also crucial for building trust. By making AI decision-making processes clear, we can ensure accountability and foster confidence in AI systems." },
+      { id: 7, speakerId: 3, transcriptionId: 4, content: "What about AI’s impact on the job market? How can we prepare workers for the changes AI will bring, and what opportunities might arise from this transformation?" },
+      { id: 8, speakerId: 1, transcriptionId: 4, content: "AI will automate repetitive tasks, but it also creates new opportunities in fields like AI development, data science, and ethics consulting, driving demand for new skills." },
+      { id: 9, speakerId: 2, transcriptionId: 4, content: "Upskilling is key to preparing the workforce for AI-driven changes. Training programs and education initiatives can help workers adapt to new roles and technologies." },
+      { id: 10, speakerId: 3, transcriptionId: 4, content: "Thank you both for these insightful points! This discussion has highlighted critical aspects of AI’s ethical and technical landscape. We appreciate your contributions." },
     ],
-    language: "English",
-    creatorId: 2
+    language: "en",
+    creatorId: 1,
   },
   {
     id: 5,
-    title: "University Lecture",
-    description: "Lecture on quantum physics.",
-    isSegmented: true,
-    speakersQuantity: 1,
-    speakers: [
-      { id: 1, name: "Professor" }
-    ],
-    lines: [
-      { id: 1, speakerId: 1, transcriptionId: 5, content: "Today we will discuss quantum mechanics." }
-    ],
-    language: "English",
-    creatorId: 3
-  },
-  {
-    id: 6,
-    title: "Business Meeting",
-    description: "Quarterly business meeting transcription.",
-    isSegmented: true,
-    speakersQuantity: 5,
-    speakers: [
-      { id: 1, name: "CEO" },
-      { id: 2, name: "CFO" },
-      { id: 3, name: "CTO" },
-      { id: 4, name: "HR Manager" },
-      { id: 5, name: "Marketing Director" }
-    ],
-    lines: [
-      { id: 1, speakerId: 1, transcriptionId: 6, content: "Let's start the meeting." },
-      { id: 2, speakerId: 2, transcriptionId: 6, content: "Here are the financial reports." }
-    ],
-    language: "English",
-    creatorId: 19
-  },
-  {
-    id: 7,
-    title: "Documentary Narration",
-    description: "Narration for a documentary on climate change.",
-    isSegmented: false,
-    speakersQuantity: 0,
-    speakers: [],
-    lines: [
-      { id: 1, speakerId: 1, transcriptionId: 7, content: "Climate change is a global issue." }
-    ],
-    language: "English",
-    creatorId: 14
-  },
-  {
-    id: 8,
-    title: "TED Talk",
-    description: "Inspirational TED talk on innovation.",
-    isSegmented: false,
-    speakersQuantity: 0,
-    speakers: [],
-    lines: [
-      { id: 1, speakerId: 1, transcriptionId: 8, content: "Innovation drives progress." }
-    ],
-    language: "English",
-    creatorId: 2
-  },
-  {
-    id: 9,
-    title: "News Broadcast",
-    description: "Daily news broadcast transcription.",
+    title: "Comprehensive Transcript of the Strategic Planning Session",
+    key: "3-1",
+    description: "Detailed transcript of the strategic planning session for Q3 goals.",
     isSegmented: true,
     speakersQuantity: 3,
     speakers: [
-      { id: 1, name: "Anchor" },
-      { id: 2, name: "Reporter 1" },
-      { id: 3, name: "Reporter 2" }
+      { id: 1, name: "Manager" },
+      { id: 2, name: "Team Lead" },
+      { id: 3, name: "Analyst" },
     ],
     lines: [
-      { id: 1, speakerId: 1, transcriptionId: 9, content: "Good evening, here are the top stories." },
-      { id: 2, speakerId: 2, transcriptionId: 9, content: "Reporting live from the scene." }
+      { id: 1, speakerId: 1, transcriptionId: 5, content: "Let’s kick off our Q3 strategic planning session. What’s our primary goal for this quarter, and how can we align our efforts to achieve it across all teams?" },
+      { id: 2, speakerId: 2, transcriptionId: 5, content: "Our main goal is to increase product adoption by 20%. This will require coordinated efforts in marketing, product development, and customer support to drive success." },
+      { id: 3, speakerId: 3, transcriptionId: 5, content: "Data indicates our current adoption rate is stable but needs a boost. We’ve analyzed user trends and identified key areas where we can improve engagement." },
+      { id: 4, speakerId: 1, transcriptionId: 5, content: "What specific strategies can we implement to achieve this 20% increase in adoption, and how can we ensure they’re effective across different user segments?" },
+      { id: 5, speakerId: 2, transcriptionId: 5, content: "We could launch a targeted marketing campaign tailored to our core audience, using personalized messaging and promotions to drive interest and conversions." },
+      { id: 6, speakerId: 3, transcriptionId: 5, content: "Additionally, we can improve user onboarding by analyzing feedback and simplifying the process to make it more intuitive and engaging for new users." },
+      { id: 7, speakerId: 1, transcriptionId: 5, content: "Those are solid ideas. How do we measure the success of these strategies, and what metrics should we prioritize to track our progress effectively?" },
+      { id: 8, speakerId: 2, transcriptionId: 5, content: "We should track key metrics like user retention, engagement rates, and conversion rates to gauge the impact of our strategies and ensure we’re meeting our goals." },
+      { id: 9, speakerId: 3, transcriptionId: 5, content: "I can set up a real-time dashboard to monitor these KPIs, providing actionable insights to help us adjust our strategies and optimize performance quickly." },
+      { id: 10, speakerId: 1, transcriptionId: 5, content: "Excellent work, team. Let’s finalize this plan, assign responsibilities, and start execution promptly. Thank you all for your valuable input and commitment!" },
     ],
-    language: "English",
-    creatorId: 2
+    language: "en",
+    creatorId: 1,
   },
-  {
-    id: 10,
-    title: "Movie Dialogue",
-    description: "Transcription of a dialogue from a movie.",
-    isSegmented: true,
-    speakersQuantity: 2,
-    speakers: [
-      { id: 1, name: "Character 1" },
-      { id: 2, name: "Character 2" }
-    ],
-    lines: [
-      { id: 1, speakerId: 1, transcriptionId: 10, content: "I have a bad feeling about this." },
-      { id: 2, speakerId: 2, transcriptionId: 10, content: "We need to stick together." }
-    ],
-    language: "English",
-    creatorId: 7
-  }
 ];
 
 export default transcriptions;

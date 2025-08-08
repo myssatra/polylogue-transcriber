@@ -8,8 +8,6 @@ import { darkSideTheme, darkTheme, lightTheme } from "../utils/theme";
 const { TabPane } = Tabs;
 export const AuthPage = observer(() => {
 
-    const appStore = useAppStore();
-
     return(
         <Layout style = {{height: '100%'}}>
             <Flex vertical style={{width: '100%', justifyContent: 'center', alignItems: 'center', flexGrow: '1', padding: 10, height: '100%'}}> 

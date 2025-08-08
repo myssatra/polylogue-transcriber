@@ -4,29 +4,24 @@ import {
   ConfigProvider,
   Flex,
   Input,
-  Space,
   Tabs,
   Typography,
-  theme,
   Layout,
   Affix
 } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
-import { useEffect, useState } from "react";
-import { darkSideTheme, darkTheme, lightSideTheme, lightTheme } from "../../../utils/theme";
-import TranscriptionService from "../../../utils/services/TranscriptionService";
-import { Speaker } from "../../../utils/lib/types";
+import { useState } from "react";
+import { darkSideTheme, lightSideTheme } from "../../../utils/theme";
+import { Speaker, Transcription } from "../../../utils/lib/types";
 import { observer } from "mobx-react-lite";
 import { useAppStore } from "../../../utils/contexts/AppStoreProvider";
-import { CheckCircleFilled } from "@ant-design/icons";
-
-const { Paragraph } = Typography;
+import { CheckCircleFilled, CopyOutlined, EditFilled } from "@ant-design/icons";
 
 type RightSidebarProps = {
   descriptions?: string[];
 };
 
-export const  RightSidebar = observer(({ descriptions }: RightSidebarProps) =>   {
+export const  RightSidebar = observer(() =>   {
   const [clickTriggerStr, setClickTriggerStr] = useState("Добавить описание...");
   const appStore = useAppStore();
   const [speakers, setSpeakers] = useState<Speaker[]>([]);
@@ -34,48 +29,48 @@ export const  RightSidebar = observer(({ descriptions }: RightSidebarProps) =>  
   const [rows, setRows] = useState(2);
   const [expanded, setExpanded] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const speakers = await TranscriptionService.getSpeakers();
-      setSpeakers(speakers);
-    })()
-  },[])
+  const transcription: Transcription | null = appStore.selectedTranscription;
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const speakers = await TranscriptionService.getSpeakers();
+  //     setSpeakers(speakers);
+  //   })()
+  // },[])
 
   return (
     <ConfigProvider theme={appStore.THEME === true ? darkSideTheme : lightSideTheme}>
       <Layout className="justify-between flex flex-col items-center text-center w-full p-4" style={{minWidth: '300px', width: '100%', maxWidth: '300px'}}>
         <Layout style={{display: 'flex', flexDirection: 'column'}} className="w-full" >
           <Flex vertical className="pb-1">
-            {/* <Typography.Text strong className="pb-2">Описание</Typography.Text> */}
-            <Card title='Описание' className="min-h-fit w-full p-3 overflow-hidden" size="small">
-              <Typography.Paragraph style={{marginBottom: '0px', opacity: '70%'}} className="overflow-hidden max-h-[100px]"
+            <Card title='Описание' className="min-h-fit w-full px-2 overflow-hidden" size="small">
+              <Typography.Paragraph className="overflow-hidden m-0 opacity-70"
                   key="ph1"
-                  ellipsis={{
-                    rows,
-                    expandable: 'collapsible',
-                    expanded,
-                    onExpand: (_, info) => setExpanded(info.expanded),
-                  }}
-                  copyable
+                  // ellipsis={{
+                  //   rows: 4,
+                  //   expandable: 'collapsible',
+                  //   expanded,
+                  //   onExpand: (_, info) => setExpanded(info.expanded),
+                  //   symbol: (expanded) => (expanded ? "Свернуть" : "Развернуть")
+                  // }}
+                  copyable={ transcription?.description?.trim() ? { icon: <CopyOutlined style={{ color: '#8bc43b' }} /> } : false} 
                   editable={{ onChange: setClickTriggerStr, triggerType: ["text"]}}
               >
-                  {clickTriggerStr ==='' ? 'Добавить описание...' : clickTriggerStr}
+                  {transcription?.description.trim() ?? "Добавьте описание..."}
               </Typography.Paragraph>
             </Card>
           </Flex>
 
-          <Flex vertical className="py-5" wrap gap='small'>
+          <Flex vertical className="py-2" wrap gap='small'>
             {/* <Typography.Text strong className="pb-2">Спикеры</Typography.Text> */}
             <Card className="w-full" size='small' title="Спикеры">
               <Flex vertical gap='small'>
-              {
-                speakers.map( speaker =>
-                    <Input allowClear defaultValue={speaker.name} key={speaker.id}
-                    suffix={<CheckCircleFilled style={{color:  '#8bc43b', fontSize: '12px', opacity: '80%'}} size={5} onClick={() => console.log('checked')} />} />
+              { transcription != null && transcription.speakers != null &&
+                transcription.speakers.map( (speaker: Speaker) =>
+                    <Input allowClear value={speaker.name} key={speaker.id}
+                    suffix={<EditFilled style={{color: '#8bc43b', fontSize: '12px', opacity: '80%'}} size={5} onClick={() => console.log('checked')} />} />
               )}
               </Flex>
-              {/* <Input  suffix={[<CheckOutlined />, <CloseOutlined/>]}></Input>
-              {speakers.map( s => s.name).length} */}
             </Card>
           </Flex>
         </Layout>

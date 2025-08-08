@@ -6,7 +6,6 @@ import TranscriptionService from "../utils/services/TranscriptionService";
 import { RightSidebar } from "../components/WorkspacePage/RightSidebar/RightSidebar";
 import { LeftSidebar } from "../components/WorkspacePage/LeftSidebar/LeftSidebar";
 import { observer } from "mobx-react-lite";
-import { useAppStore } from "../utils/contexts/AppStoreProvider";
 import { TranscriptionsList } from "../components/WorkspacePage/TranscriptionsWorkspace/TranscriptionsWorkspace";
 
 export const Workspace = observer(() => {
@@ -15,6 +14,8 @@ export const Workspace = observer(() => {
   const [transcriptions, setTranscriptions] = useState<Transcription[] | null>(
     null
   );
+
+
   const [isFirstUseEffect, setIsFirstUseEffect] = useState(false);
 
   useEffect(() => {
@@ -45,8 +46,6 @@ export const Workspace = observer(() => {
       })();
     }
   }, [isFirstUseEffect]);
-
-  const appStore = useAppStore();
 
   //@ts-ignore
   return (

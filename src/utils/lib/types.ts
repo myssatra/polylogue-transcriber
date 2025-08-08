@@ -2,6 +2,7 @@ import transcriptions from "../JSON/transcriptions"
 
 export type Transcription = {
     id: number,
+    key: string,
     title: string,
     description: string,
     isSegmented: boolean,
@@ -38,6 +39,19 @@ export type Folder = {
     id: number,
     title: string,
     transcriptionsIds?: number[]
+}
+
+export type ChatMessage = {
+    id: number,
+    sender: string,
+    content: string
+}
+
+export type AIchat = {
+    id: string,
+    title: string,
+    transcription_id: number,
+    messages: ChatMessage[]
 }
 
 // get api/folders

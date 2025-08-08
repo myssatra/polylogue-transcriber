@@ -1,7 +1,7 @@
-import { Route, Router, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import { StartPage } from './pages/StartPage';
-import { ConfigProvider, Layout, Flex} from 'antd';
+import { ConfigProvider } from 'antd';
 import { Workspace } from './pages/WorkspacePage';
 import { UserEdit } from './pages/UserPage';
 import { AuthPage } from './pages/AuthPage';
@@ -28,6 +28,12 @@ const App = observer(() => {
     }, [pathName])
 
     const appStore = useAppStore();
+
+    useEffect(() => {
+        document.body.className = appStore.THEME ? 'dark-theme' : 'light-theme';
+        // Для отладки
+        console.log('Current theme:', appStore.THEME ? 'dark' : 'light');
+      }, [appStore.THEME]);
 
     // const IS_THEME_DARK = useSelector((state: any) => state.IS_THEME_DARK)
 

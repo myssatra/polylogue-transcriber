@@ -1,11 +1,10 @@
 
 .container {
     
-    padding: 8px;
+    //padding: 8px;
     width: 100%;
     gap: 8px;
     position: relative;
-
     .container_transcription {
         padding: 4px;
         width: 100%;
@@ -21,6 +20,7 @@
         height: 100%;
         border-radius: 8px;
         border: 1px solid transparent;
+        scrollbar-color: blue;
     }
 
     .button_handler {
@@ -28,6 +28,7 @@
         transform: translate(-100%, 0);
         left: 100%;
     }
+
 }
 
 .player {

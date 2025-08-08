@@ -27,6 +27,7 @@ import {ConfigProvider} from 'antd'
 import { darkSideTheme, lightSideTheme } from "../../../utils/theme";
 import { useAppStore } from "../../../utils/contexts/AppStoreProvider";
 import { observer } from 'mobx-react-lite';
+import { AudioRecorder } from "react-audio-voice-recorder";
 
 type Transcription = {
   id: number;
@@ -52,6 +53,7 @@ export const LeftSidebar = observer( ({ authUser, transriptions }: LeftSidebarPr
   const navigate = useNavigate(); 
   const appStore = useAppStore();
   const contextRef = useRef<HTMLInputElement>(null);
+  const [show, setShow] = useState(false);
 
   const handleClickOutsideContextMenu = (event: any) => {
     if (contextRef.current && !contextRef.current.contains(event.target))
@@ -65,18 +67,15 @@ export const LeftSidebar = observer( ({ authUser, transriptions }: LeftSidebarPr
     };
   }, []);
 
-
   const [isOpenContextMenu, setIsOpenContextMenu] = useState(false);
 
   return (
     <ConfigProvider theme={appStore.THEME === true ? darkSideTheme : lightSideTheme}>
       <Layout style={{display: 'flex', flexDirection: 'column', minWidth: '300px', width: '100%', maxWidth: '300px' }}>
-        <Layout
-          className={'flex flex-col justify-center items-center w-fulpt-6 py-4'}
-        >
-          <Space direction="vertical" size={"small"} >
+        <Layout className={'flex flex-col justify-center items-center w-full pt-6 py-4 px-4'}>
+          <Space direction="vertical" size={"small"} className="w-full">
             <Button
-              className="min-w-[210px] py-4"
+              className="w-full py-4"
               color="default"
               onClick={() => toggleAddTrans()}
               key={"addTranscription"}
@@ -85,7 +84,7 @@ export const LeftSidebar = observer( ({ authUser, transriptions }: LeftSidebarPr
               Добавить расшифровку
             </Button>
             <Button
-              className="min-w-[210px] py-4"
+              className="w-full py-4"
               color="default"
               onClick={() => toggleAddFolder()}
               key={"addFolder"}
@@ -93,11 +92,12 @@ export const LeftSidebar = observer( ({ authUser, transriptions }: LeftSidebarPr
               <FolderAddOutlined />
               Добавить папку
             </Button>
+            
           </Space>
-          <Flex className="w-full p-4 h-full">
+          <Flex className="w-full h-full py-4">
             <FoldersTree />
           </Flex>
-          <Layout style={{display: 'flex', flexDirection: 'column'}} className="relative w-full p-4">
+          <Layout style={{display: 'flex', flexDirection: 'column'}} className="relative w-full py-4 pt-0">
             <Layout
               ref={contextRef}
               className={lsb.contextMenu}

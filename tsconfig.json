@@ -18,10 +18,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"]
   },
   "include": [
     "src",
-    "postcss.config.js"
+    "postcss.config.js",
   ]
 }

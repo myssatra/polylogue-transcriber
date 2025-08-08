@@ -6,12 +6,16 @@ export const foldersTree: TreeDataNode[] = [
         key: '1',
         children: [
             {
-                title: 'Interview with John Doe',
+                title: 'Sample Transcription',
                 key: '1-1'
             },
             {
                 title: 'Tech Conference Keynote',
                 key: '1-2'
+            },
+            {
+                title: 'Interview with John Doe',
+                key: '1-3'
             }
         ]
     },

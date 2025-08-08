@@ -5,7 +5,8 @@ import { theme, ThemeConfig } from "antd";
 export const lightTheme: ThemeConfig = {
   algorithm: theme.defaultAlgorithm,
   token: {
-      colorPrimary: '#8bc43b'
+      colorPrimary: '#8bc43b',
+      colorIcon: '#e23d28',
   },
   components: {
    Button: {
@@ -40,18 +41,18 @@ export const lightSideTheme: ThemeConfig = {
          colorBgLayout: '#c1c1c1'
       },
       Tree: {
-         colorBgContainer: '#FFFFFF'
+         colorBgContainer: '#F5F5F5'
       },
       Button: {
-         colorBgContainer: '#FFFFFF',
+         colorBgContainer: '#F5F5F5',
          primaryShadow: 'transparent'
       },
       Card: {
-         colorBgContainer: '#FFFFFF'
+         colorBgContainer: '#F5F5F5'
       },
       Input: {
-         colorBgContainer: '#FFFFFF'
-      },
+         colorBgContainer: '#F5F5F5'
+      }
    }
 }
 
