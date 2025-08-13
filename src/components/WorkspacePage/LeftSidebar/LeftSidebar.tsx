@@ -21,14 +21,12 @@ import { useNavigate } from "react-router-dom";
 import { Treeview, User } from "../../../utils/lib/types";
 import UserService from "../../../utils/services/UserService";
 import { useEffect, useState, useRef } from "react";
-import { FoldersTree } from "../FoldersTree";
+import { FoldersTree } from "./FoldersTree";
 import lsb from './LeftSideBar.module.scss'
 import {ConfigProvider} from 'antd'
 import { darkSideTheme, lightSideTheme } from "../../../utils/theme";
 import { useAppStore } from "../../../utils/contexts/AppStoreProvider";
 import { observer } from 'mobx-react-lite';
-import { AudioRecorder } from "react-audio-voice-recorder";
-import TranscriptionService from "../../../utils/services/TranscriptionService";
 
 type Transcription = {
   id: number;
@@ -47,28 +45,18 @@ type LeftSidebarProps = {
   folders?: Folder[];
 };
 
-export const LeftSidebar = observer( ({ authUser, transriptions }: LeftSidebarProps) => {
+export const LeftSidebar = observer( ({ authUser }: LeftSidebarProps) => {
   const [isShowingAddTrans, toggleAddTrans] = useModal();
-  const [isShowingAddFordel, toggleAddFolder] = useModal();
-
-  // тест дерева
-  const [treeview, setTreeView] = useState<Treeview>();
-
-  useEffect(() => {
-  (async () => {
-      // const authUser: User = await UserService.getAuthUser();
-      // console.log("userId", authUser.id);
-      const treeview = await TranscriptionService.getUserTreeview();
-      setTreeView(treeview);
-      console.log('treeview test:', treeview)
-  })();
-}, []);
-
-
+  const [isShowingAddFolder, toggleAddFolder] = useModal();
 
   const navigate = useNavigate(); 
   const appStore = useAppStore();
   const contextRef = useRef<HTMLInputElement>(null);
+
+  const handleFolderCreated = (refreshTree: () => void) => {
+    refreshTree();
+    toggleAddFolder();
+  }
 
   const handleClickOutsideContextMenu = (event: any) => {
     if (contextRef.current && !contextRef.current.contains(event.target))
@@ -89,6 +77,7 @@ export const LeftSidebar = observer( ({ authUser, transriptions }: LeftSidebarPr
       <Layout style={{display: 'flex', flexDirection: 'column', minWidth: '300px', width: '100%', maxWidth: '300px' }}>
         <Layout className={'flex flex-col justify-center items-center w-full pt-6 py-4 px-4'}>
           <Space direction="vertical" size={"small"} className="w-full">
+
             <Button
               className="w-full py-4"
               color="default"
@@ -98,6 +87,7 @@ export const LeftSidebar = observer( ({ authUser, transriptions }: LeftSidebarPr
               <FileAddOutlined />
               Добавить расшифровку
             </Button>
+
             <Button
               className="w-full py-4"
               color="default"
@@ -109,9 +99,11 @@ export const LeftSidebar = observer( ({ authUser, transriptions }: LeftSidebarPr
             </Button>
             
           </Space>
+
           <Flex className="w-full h-full py-4">
             <FoldersTree />
           </Flex>
+
           <Layout style={{display: 'flex', flexDirection: 'column'}} className="relative w-full py-4 pt-0">
             <Layout
               ref={contextRef}
@@ -187,16 +179,13 @@ export const LeftSidebar = observer( ({ authUser, transriptions }: LeftSidebarPr
 
         <Modal
           title="Создание папки"
-          open={isShowingAddFordel}
+          open={isShowingAddFolder}
           onCancel={toggleAddFolder}
-          footer={[
-            <Button className="w-full" type="primary">
-              Создать
-            </Button>
-          ]}
+          footer={false}
         >
-          <CreateFolder />
+          <CreateFolder onSuccess={toggleAddFolder} />
         </Modal>
+
       </Layout>
     </ConfigProvider>
   );

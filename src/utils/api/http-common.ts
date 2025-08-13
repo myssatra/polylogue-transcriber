@@ -7,6 +7,7 @@ const http = axios.create({
   baseURL: 'http://localhost:8000/api/v0',
   headers: {
     'Content-type': 'application/json',
+    Authorization: `Bearer ${UserService.getAccessToken()}`
   },
 });
 
@@ -16,6 +17,9 @@ http.interceptors.request.use(
     const token = UserService.getAccessToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    }
+    else{
+      console.log('хуйня с токеном')
     }
     return config;
   },

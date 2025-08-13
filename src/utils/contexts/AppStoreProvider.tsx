@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { observer, useLocalObservable } from "mobx-react-lite";
-import { Transcription } from "../lib/types";
+import { Transcription, User } from "../lib/types";
+import UserService from "../services/UserService";
 
 export const createAppStore = (props: any) => {
   return {
@@ -16,6 +17,14 @@ export const createAppStore = (props: any) => {
     selectedTranscription: null as Transcription | null,
     setSelectedTranscription: function (transcription: Transcription | null) {
       this.selectedTranscription = transcription;
+    },
+
+    user:  props.User || null,
+    setAuthUser: async function () {
+      this.user = await UserService.getAuthUser();
+    },
+    logout() {
+      UserService.logoutUser();
     }
   };
 };

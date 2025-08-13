@@ -3,7 +3,7 @@ import transcriptions from "../JSON/transcriptions"
 export type Transcription = {
     id: number,
     key: string,
-    title: string,
+    name: string,
     description: string,
     isSegmented: boolean,
     speakersQuantity: number,
@@ -47,7 +47,7 @@ export type UserRole = {
 export type Directory = {
     id: number,
     name: string,
-    //transcriptionsIds?: number[]
+    transcripts: Transcription[]
 }
 
 export type ChatMessage = {

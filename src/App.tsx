@@ -18,12 +18,16 @@ const App = observer(() => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(pathName.pathname === '/login')
+        (async() => {
+            if(pathName.pathname === '/login')
             return;
 
-        if(!UserService.isTokenValid()) {
-            navigate('/login');
-        }
+            if(!UserService.isTokenValid()) {
+                navigate('/login');
+            }
+
+            await appStore.setAuthUser();
+        })()
 
     }, [pathName])
 

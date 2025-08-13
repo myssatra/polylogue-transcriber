@@ -3,6 +3,7 @@ import testApi from "../api/axiosMock";
 import { AIchat, Directory, Speaker, Transcription, Treeview } from "../lib/types";
 import { Axios, AxiosAdapter, AxiosResponse } from "axios";
 import http from "../api/http-common";
+import { Folder } from "../../components/WorkspacePage/LeftSidebar/LeftSidebar";
 
 const getTranscriptions = async (): Promise<Transcription[]> => {
   const resp = await testApi.get("/transcriptions");
@@ -19,15 +20,23 @@ const getUserDirectories = async (): Promise<Directory[]> => {
   return resp.data;
 }
 
+
 const getUserTreeview = async (): Promise<Treeview> => {
   const resp = await http.get('/directories/treeview');
   return resp.data;
 }
 
-const getFoldersTree = async (): Promise<TreeDataNode[]> => {
-  const resp = await testApi.get("/foldersTree");
+const createUserDirectory = async ( owner_id: number, name: string): Promise<Directory> => {
+  const resp = await http.post<any>('/directories', 
+    {"owner_id": owner_id, "name": name}
+  );
   return resp.data;
-};
+}
+
+// const getFoldersTree = async (): Promise<TreeDataNode[]> => {
+//   const resp = await testApi.get("/foldersTree");
+//   return resp.data;
+// };
 
 // const getTranscriptionById = async (id: number): Promise<Transcription> => {
 //     const resp = await api.get(`/transcription/${id}`);
@@ -82,7 +91,8 @@ const TranscriptionService = {
   // getFolders,
   getUserTreeview,
   getUserDirectories,
-  getFoldersTree,
+  createUserDirectory,
+  //getFoldersTree,
   getSpeakers,
   getEmilysTranscription,
   getUserTranscriptions,

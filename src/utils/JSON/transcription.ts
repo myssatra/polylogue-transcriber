@@ -3,7 +3,7 @@ import { Transcription } from "../lib/types"
 export const emilysTranscription: Transcription = {
     id: 1,
     key: '0-0',
-    title: "Sample Transcription",
+    name: "Sample Transcription",
     description: "This is a sample transcription with multiple lines and speakers.",
     isSegmented: true,
     speakersQuantity: 3,

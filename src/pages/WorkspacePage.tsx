@@ -68,7 +68,7 @@ export const Workspace = observer(() => {
       <Layout style={{display: 'flex', flexDirection: 'row', height: '100%', width: '100%', justifyContent: 'space-between', flexGrow: '1'}}>
         <LeftSidebar
           authUser={authUser}
-          transriptions={transcriptions?.map((transcriptions) => transcriptions)}
+          //transriptions={transcriptions?.map((transcriptions) => transcriptions)}
         />
         <Layout className="w-full">
           <TranscriptionsList transcriptions={transcriptions} />

@@ -3,7 +3,7 @@ import { Transcription } from "../lib/types";
 const transcriptions: Transcription[] = [
   {
     id: 1,
-    title: "Sample Transcription",
+    name: "Sample Transcription",
     key: "1-1",
     description: "This sample transcription features three speakers discussing a topic in depth. Segmented into multiple lines, it captures diverse insights, questions, and responses, showcasing a dynamic and collaborative dialogue for clear representation in structured formats.",
     isSegmented: true,
@@ -30,7 +30,7 @@ const transcriptions: Transcription[] = [
   },
   {
     id: 2,
-    title: "Tech Conference Keynote",
+    name: "Tech Conference Keynote",
     key: "1-2",
     description: "Keynote speech from the annual Tech Conference, discussing innovations in software engineering.",
     isSegmented: true,
@@ -57,7 +57,7 @@ const transcriptions: Transcription[] = [
   },
   {
     id: 3,
-    title: "Interview with John Doe",
+    name: "Interview with John Doe",
     key: "1-3",
     description: "An in-depth interview with John Doe, discussing his journey in the tech industry.",
     isSegmented: true,
@@ -84,7 +84,7 @@ const transcriptions: Transcription[] = [
   },
   {
     id: 4,
-    title: "Panel Discussion on AI",
+    name: "Panel Discussion on AI",
     key: "2-1",
     description: "A panel discussion exploring the ethical and technical aspects of artificial intelligence.",
     isSegmented: true,
@@ -111,7 +111,7 @@ const transcriptions: Transcription[] = [
   },
   {
     id: 5,
-    title: "Comprehensive Transcript of the Strategic Planning Session",
+    name: "Comprehensive Transcript of the Strategic Planning Session",
     key: "3-1",
     description: "Detailed transcript of the strategic planning session for Q3 goals.",
     isSegmented: true,
