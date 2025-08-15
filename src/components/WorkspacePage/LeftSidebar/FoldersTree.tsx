@@ -6,6 +6,11 @@ import { Transcription, Treeview } from "../../../utils/lib/types";
 import { DirectoryTreeProps } from "antd/es/tree";
 import { useAppStore } from "../../../utils/contexts/AppStoreProvider";
 import { observer } from "mobx-react-lite";
+import DirectoryService from "../../../utils/services/DirectoryService";
+
+interface CustomTreeNode extends TreeDataNode {
+  directory_id?: number;
+}
 
 export const FoldersTree = observer(() => {
     const [treeData, setTreeData] = useState<TreeDataNode[]>([]);
@@ -27,7 +32,7 @@ export const FoldersTree = observer(() => {
 
   useEffect(() => {
     const fetchData = async() => {
-      const data: Treeview = await TranscriptionService.getUserTreeview();
+      const data: Treeview = await DirectoryService.getUserTreeview();
       const sortedDirectories = [...data.directories].sort((a,b) => a.id - b.id);
       const transformedData = sortedDirectories.map(dir => ({
         key: dir.id.toString(),
@@ -43,7 +48,7 @@ export const FoldersTree = observer(() => {
       console.log('transformedDataTest:',transformedData)
     }
     fetchData();
-  },treeData);
+  },[]);
 
   const addIconsToTreeData = (data: TreeDataNode[]): TreeDataNode[] => {
       return data.map(node => ({
@@ -55,9 +60,12 @@ export const FoldersTree = observer(() => {
   const onSelect: TreeProps['onSelect'] = (selectedKeys: React.Key[], info: any) => {
     (async() => {
       const selectedNode = info.node;
+      console.log('info node',info.node)
       if(!selectedNode.children){
         try{
-          const transcription: Transcription = await TranscriptionService.getTranscriptionByKey(selectedNode.key);
+          const [,selectedTranscriptionId] = selectedNode.key.split('-');
+          const transcription: Transcription = await TranscriptionService.getTranscriptionById(selectedTranscriptionId);
+          console.log('DDDDDDDDDDDDDDDDDDDDDDDDDD',transcription);
           setSelectedTranscription(transcription);
         }
         catch(error) {
@@ -72,12 +80,12 @@ export const FoldersTree = observer(() => {
           const treeDataWithIcons = addIconsToTreeData(treeData);
           setTreeData(treeDataWithIcons);
           console.log('хуйня', treeData);
-  }, treeData)
+  }, [])
 
   const onExpand: DirectoryTreeProps['onExpand'] = (keys, info) => {
     console.log('Trigger Expand', keys, info);
   };
-  
+
   return(
       <Tree
         switcherIcon={<DownOutlined />}

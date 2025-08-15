@@ -7,6 +7,7 @@ import { Directory, Transcription } from "../../utils/lib/types";
 import { useEffect, useRef, useState } from "react";
 import TranscriptionService from "../../utils/services/TranscriptionService";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
+import DirectoryService from "../../utils/services/DirectoryService";
 
 type Folder = {
     id: number,
@@ -71,7 +72,7 @@ export function CreateTranscription(){
     
     useEffect(() => {
         (async() => {
-            const directories = await TranscriptionService.getUserDirectories(); 
+            const directories = await DirectoryService.getUserDirectories(); 
             setDirectories(directories);
             console.log('directories',directories);
         })()

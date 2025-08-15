@@ -19,7 +19,7 @@ export const createAppStore = (props: any) => {
       this.selectedTranscription = transcription;
     },
 
-    user:  props.User || null,
+    user: props.User || null,
     setAuthUser: async function () {
       this.user = await UserService.getAuthUser();
     },

@@ -5,43 +5,20 @@ import { Axios, AxiosAdapter, AxiosResponse } from "axios";
 import http from "../api/http-common";
 import { Folder } from "../../components/WorkspacePage/LeftSidebar/LeftSidebar";
 
+// const getTranscriptions = async (): Promise<Transcription[]> => {
+//   const resp = await testApi.get("/transcriptions");
+//   return resp.data;
+// };
+
 const getTranscriptions = async (): Promise<Transcription[]> => {
-  const resp = await testApi.get("/transcriptions");
+  const resp = await http.get("/transcripts");
   return resp.data;
 };
 
-// const getFolders = async (): Promise<Folder[]> => {
-//   const resp = await testApi.get("/folders");
-//   return resp.data;
-// };
-
-const getUserDirectories = async (): Promise<Directory[]> => {
-  const resp = await http.get('/directories');
+const getTranscriptionById = async (transcript_id: number): Promise<Transcription> => {
+  const resp = await http.get(`/transcripts/views/${transcript_id}`);
   return resp.data;
-}
-
-
-const getUserTreeview = async (): Promise<Treeview> => {
-  const resp = await http.get('/directories/treeview');
-  return resp.data;
-}
-
-const createUserDirectory = async ( owner_id: number, name: string): Promise<Directory> => {
-  const resp = await http.post<any>('/directories', 
-    {"owner_id": owner_id, "name": name}
-  );
-  return resp.data;
-}
-
-// const getFoldersTree = async (): Promise<TreeDataNode[]> => {
-//   const resp = await testApi.get("/foldersTree");
-//   return resp.data;
-// };
-
-// const getTranscriptionById = async (id: number): Promise<Transcription> => {
-//     const resp = await api.get(`/transcription/${id}`);
-//     return resp.data;
-// }
+};
 
 const getSpeakers = async (): Promise<Speaker[]> => {
   const resp: AxiosResponse<Speaker[]> = await http.get('/speakers');
@@ -59,19 +36,19 @@ const getUserTranscriptions = async (): Promise<Transcription[]> => {
   return resp.data
 } 
 
-const getTranscriptionByKey = async (key: React.Key[]): Promise<Transcription> => {
-  const resp = await testApi.get("/transcriptions");
-  const transcriptionList: Transcription[] = resp.data;
+// const getTranscriptionByKey = async (key: React.Key[]): Promise<Transcription> => {
+//   // const resp = await testApi.get("/transcriptions");
+//   const transcriptionList = await getTranscriptions();
 
-  const transcription = transcriptionList.find(t => t.key === key.toString());
+//   const transcription = transcriptionList.find(t => t.key === key.toString());
 
-  if(!transcription)
-  {
-    alert("нет такой транскрипции")
-  }
+//   if(!transcription)
+//   {
+//     alert("нет такой транскрипции")
+//   }
 
-  return transcription!;
-};
+//   return transcription!;
+// };
 
 // const getTranscriptionById = async (transcriptId: number): Promise<Transcription> => {
 //   const resp: AxiosResponse<Transcription> = await http.get(`transcripts/views/${transcriptId}`);
@@ -86,12 +63,10 @@ const getAIchat = async (): Promise<AIchat> => {
 const TranscriptionService = {
   //getTranscriptionById,
   getTranscriptions,
-  getTranscriptionByKey,
+  getTranscriptionById,
+  // getTranscriptionByKey,
   // getTranscriptionById,
   // getFolders,
-  getUserTreeview,
-  getUserDirectories,
-  createUserDirectory,
   //getFoldersTree,
   getSpeakers,
   getEmilysTranscription,

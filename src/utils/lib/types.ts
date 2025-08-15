@@ -2,24 +2,32 @@ import transcriptions from "../JSON/transcriptions"
 
 export type Transcription = {
     id: number,
-    key: string,
+    //key: string,
     name: string,
     description: string,
     isSegmented: boolean,
     speakersQuantity: number,
     speakers: Speaker[],
-    lines: Line[],
+    comments: Comment[],
     language: string,
     owner_id: number
 }
 
-export type Line = {
+export type Comment = {
     id: number,
-    speakerId: number, //(идентификаторы или объекты целиком?)
-    transcriptionId: number,
-    content: string,
+    speaker_id: number, //(идентификаторы или объекты целиком?)
+    transcript_id: number,
+    source_content: string,
     //timestamp: AudioTimestamp
 }
+
+// export type Line = {
+//     id: number,
+//     speakerId: number, //(идентификаторы или объекты целиком?)
+//     transcriptionId: number,
+//     content: string,
+//     //timestamp: AudioTimestamp
+// }
 
 export type Speaker = {
     id: number,

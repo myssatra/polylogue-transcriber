@@ -1,15 +1,11 @@
 import { Affix, Button, Flex, Layout, notification } from 'antd'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
-import { Line, Speaker, Transcription } from '../../../../utils/lib/types'
+import { Comment, Speaker, Transcription } from '../../../../utils/lib/types'
 import { Bubble } from '@ant-design/x'
 import { CopyOutlined, ExclamationCircleFilled } from '@ant-design/icons'
 import { CustomPlayer } from './CustomPlayer'
 import { useAppStore } from '../../../../utils/contexts/AppStoreProvider'
-import Animate from 'rc-animate';
-import { NULL } from 'sass'
-import TranscriptionService from '../../../../utils/services/TranscriptionService'
-
 
 export const TranscriptionList = observer (() => {
     const [api, contextHolder] = notification.useNotification();
@@ -35,22 +31,22 @@ export const TranscriptionList = observer (() => {
         <Layout id='container' className='relative w-full h-[100%]'>
             {contextHolder}
                     <Flex vertical className='border rounded-lg px-[15px] py-[10px] h-full overflow-y-auto' style={flexStyle}>
-                        {transcription != null && transcription.lines != null &&
-                            transcription.lines.map((line: Line) =>
-                            <Bubble className='py-[5px]' key={line.id}
+                        {transcription != null && transcription.comments != null &&
+                            transcription.comments.map((comment: Comment) =>
+                            <Bubble className='py-[5px]' key={comment.id}
                                 header={ transcription.speakers
-                                .filter((speaker: Speaker) => speaker.id === line.speakerId)
+                                .filter((speaker: Speaker) => speaker.id === comment.speaker_id)
                                 .map((speaker: Speaker) => speaker.name)}
 
                                 content={
                                     <Flex vertical>
-                                        {line.content}
+                                        {comment.source_content}
                                         <Flex justify='end'>
                                             <Button
                                                 color="default" variant="text" size="small"
                                                 icon={<CopyOutlined style={{color: '#8bc43b'}}/>}
                                                 onClick={() => {
-                                                    navigator.clipboard.writeText(line.content)
+                                                    navigator.clipboard.writeText(comment.source_content)
                                                     openNotification();
                                                     }}/>
                                         </Flex>

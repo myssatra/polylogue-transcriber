@@ -2,6 +2,7 @@ import { Button, Form, Input } from "antd";
 import TranscriptionService from "../../utils/services/TranscriptionService";
 import { observer } from "mobx-react-lite";
 import { useAppStore } from "../../utils/contexts/AppStoreProvider";
+import DirectoryService from "../../utils/services/DirectoryService";
 
 interface CreateFolderProps {
     onSuccess?: () => void;
@@ -23,7 +24,7 @@ export const CreateFolder = observer( ({onSuccess}: CreateFolderProps) => {
     const handleCreate = async(values : {name: string, owner_id: number  }) => {
         console.log('zalupa', values.name)
         console.log('appStoreUser', user.id)
-        await TranscriptionService.createUserDirectory(user.id, values.name);
+        await DirectoryService.createUserDirectory(user.id, values.name);
         onSuccess?.();
     }
 
