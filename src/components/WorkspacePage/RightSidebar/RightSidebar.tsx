@@ -10,33 +10,48 @@ import {
   Affix
 } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { darkSideTheme, lightSideTheme } from "../../../utils/theme";
 import { Speaker, Transcription } from "../../../utils/lib/types";
 import { observer } from "mobx-react-lite";
 import { useAppStore } from "../../../utils/contexts/AppStoreProvider";
-import { CheckCircleFilled, CopyOutlined, EditFilled } from "@ant-design/icons";
+import { CopyOutlined, EditFilled } from "@ant-design/icons";
+import TranscriptionService from "../../../utils/services/TranscriptionService";
 
 type RightSidebarProps = {
   descriptions?: string[];
 };
 
 export const  RightSidebar = observer(() =>   {
-  const [clickTriggerStr, setClickTriggerStr] = useState("Добавить описание...");
+  //const [handleDescriptionEdit, setHandleDescriptionEdit] = useState("Добавить описание...");
   const appStore = useAppStore();
-  const [speakers, setSpeakers] = useState<Speaker[]>([]);
+  const [newDescription, setNewDescription] = useState<string | null>('');
+  
+  // const [speakers, setSpeakers] = useState<Speaker[]>([]);
 
-  const [rows, setRows] = useState(2);
-  const [expanded, setExpanded] = useState(false);
+  // const [rows, setRows] = useState(2);
+  // const [expanded, setExpanded] = useState(false);
 
-  const transcription: Transcription | null = appStore.selectedTranscription;
+  const selectedTranscription: Transcription | null = appStore.selectedTranscription;
 
   // useEffect(() => {
   //   (async () => {
-  //     const speakers = await TranscriptionService.getSpeakers();
-  //     setSpeakers(speakers);
+      
   //   })()
-  // },[])
+  // },[selectedTranscription]);
+
+  const handleDescriptionEdit = async(value: string | null) => {
+    if(!selectedTranscription){
+      return
+    }
+    else{
+      await TranscriptionService.updateTranscription(selectedTranscription!.id, {description: value});
+      appStore.setSelectedTranscription(selectedTranscription.id, {
+        ...selectedTranscription,
+        description: value
+      })
+    }
+  }
 
   return (
     <ConfigProvider theme={appStore.THEME === true ? darkSideTheme : lightSideTheme}>
@@ -53,10 +68,10 @@ export const  RightSidebar = observer(() =>   {
                   //   onExpand: (_, info) => setExpanded(info.expanded),
                   //   symbol: (expanded) => (expanded ? "Свернуть" : "Развернуть")
                   // }}
-                  copyable={ transcription?.description?.trim() ? { icon: <CopyOutlined style={{ color: '#8bc43b' }} /> } : false} 
-                  editable={{ onChange: setClickTriggerStr, triggerType: ["text"]}}
+                  copyable={ selectedTranscription?.description ? { icon: <CopyOutlined style={{ color: '#8bc43b' }} /> } : false} 
+                  editable={{ onChange: handleDescriptionEdit, triggerType: ["text"]}}
               >
-                  {transcription?.description.trim() ?? "Добавьте описание..."}
+                  {selectedTranscription?.description ?? "Добавьте описание..."}
               </Typography.Paragraph>
             </Card>
           </Flex>
@@ -65,8 +80,8 @@ export const  RightSidebar = observer(() =>   {
             {/* <Typography.Text strong className="pb-2">Спикеры</Typography.Text> */}
             <Card className="w-full" size='small' title="Спикеры">
               <Flex vertical gap='small'>
-              { transcription != null && transcription.speakers != null &&
-                transcription.speakers.map( (speaker: Speaker) =>
+              { selectedTranscription != null && selectedTranscription.speakers != null &&
+                selectedTranscription.speakers.map( (speaker: Speaker) =>
                     <Input allowClear value={speaker.name} key={speaker.id}
                     suffix={<EditFilled style={{color: '#8bc43b', fontSize: '12px', opacity: '80%'}} size={5} onClick={() => console.log('checked')} />} />
               )}
@@ -75,31 +90,31 @@ export const  RightSidebar = observer(() =>   {
           </Flex>
         </Layout>
 
-        <Affix offsetBottom={10}>
-        <Card className="msin-w-fit flex flex-col justify-center items-center">
-          <Tabs>
-            <TabPane tab="TXT" key="1">
-              <Button type="primary" className="w-full">
-                Скачать
-              </Button>
-            </TabPane>
-            <TabPane tab="DOC" key="2">
-              <Button type="primary" className="w-full">
-                Скачать
-              </Button>
-            </TabPane>
-            <TabPane tab="JSON" key="3">
-              <Button type="primary" className="w-full">
-                Скачать
-              </Button>
-            </TabPane>
-            <TabPane tab="PDF" key="4">
-              <Button type="primary" className="w-full">
-                Скачать
-              </Button>
-            </TabPane>
-          </Tabs>
-        </Card>
+        <Affix offsetBottom={10} className="w-full">
+          <Card className="w-full flex-col justify-center items-center">
+            <Tabs tabBarStyle={{display: 'flex', justifyContent: 'center'}} className="w-full">
+              <TabPane tab="txt" key="1">
+                <Button type="primary" className="w-full">
+                  Скачать
+                </Button>
+              </TabPane>
+              <TabPane tab="docx" key="2">
+                <Button type="primary" className="w-full">
+                  Скачать
+                </Button>
+              </TabPane>
+              <TabPane tab="json" key="3">
+                <Button type="primary" className="w-full">
+                  Скачать
+                </Button>
+              </TabPane>
+              <TabPane tab="pdf" key="4">
+                <Button type="primary" className="w-full">
+                  Скачать
+                </Button>
+              </TabPane>
+            </Tabs>
+          </Card>
         </Affix>
 
 

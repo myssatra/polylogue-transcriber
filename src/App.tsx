@@ -16,6 +16,7 @@ const App = observer(() => {
 
     const pathName = useLocation();
     const navigate = useNavigate();
+    const appStore = useAppStore();
 
     useEffect(() => {
         (async() => {
@@ -23,15 +24,22 @@ const App = observer(() => {
             return;
 
             if(!UserService.isTokenValid()) {
-                navigate('/login');
+                try{
+                    await UserService.refreshAuthToken();
+                    await appStore.setAuthUser();
+                } catch(error) {
+                    navigate('/login');
+                }
             }
-
-            await appStore.setAuthUser();
+            else {
+                try {
+                    await appStore.setAuthUser();
+                } catch {
+                    navigate('/login')
+                }
+            }                
         })()
-
-    }, [pathName])
-
-    const appStore = useAppStore();
+    }, [pathName, appStore]);
 
     useEffect(() => {
         document.body.className = appStore.THEME ? 'dark-theme' : 'light-theme';

@@ -1,7 +1,5 @@
 import http from "../api/http-common";
-import directory from "../JSON/folders";
 import { Directory, Treeview } from "../lib/types";
-
 
 const getUserDirectories = async (): Promise<Directory[]> => {
   const resp = await http.get('/directories');
@@ -26,8 +24,8 @@ const getUserDirectory = async (directory_id: number): Promise<Directory> => {
     return resp.data;
 } 
 
-const updateUserDirectory = async (directory_id: number): Promise<Directory> => {
-    const resp = await http.put<any>(`/directories/${directory_id}`);
+const updateUserDirectory = async (directory_id: number, name: string): Promise<Directory> => {
+    const resp = await http.put<any>(`/directories/${directory_id}`, {"name": name});
     return resp.data;
 }
 

@@ -20,14 +20,25 @@ const getTranscriptionById = async (transcript_id: number): Promise<Transcriptio
   return resp.data;
 };
 
-const getSpeakers = async (): Promise<Speaker[]> => {
-  const resp: AxiosResponse<Speaker[]> = await http.get('/speakers');
-  // const resp = await testApi.get("/speakers");
-  return resp.data;
-};
+const deleteTranscription = async(transcript_id: number): Promise<Transcription> => {
+  const resp = await http.delete<any>(`/transcripts/${transcript_id}`);
+  return resp.data;  
+}
 
-const getEmilysTranscription = async (): Promise<Transcription> => {
-  const resp = await testApi.get("/emilysTranscription");
+const updateTranscription = async(transcript_id: number, updates: Partial<{name: string, description: string | null, directory_id: number}>): Promise<Transcription> => {
+try {
+    console.log('Sending updates:', updates); // Логируем тело запроса
+    const resp = await http.patch<any>(`/transcripts/${transcript_id}`, updates);
+    return resp.data;
+  } catch (error: any) {
+    console.error('Server error details:', error.response?.data); // Логируем ответ сервера
+    throw error;
+  }
+}
+
+const getSpeakers = async (): Promise<Speaker[]> => {
+  const resp = await http.get('/speakers');
+  // const resp = await testApi.get("/speakers");
   return resp.data;
 };
 
@@ -64,12 +75,13 @@ const TranscriptionService = {
   //getTranscriptionById,
   getTranscriptions,
   getTranscriptionById,
+  deleteTranscription,
+  updateTranscription,
   // getTranscriptionByKey,
   // getTranscriptionById,
   // getFolders,
   //getFoldersTree,
   getSpeakers,
-  getEmilysTranscription,
   getUserTranscriptions,
   getAIchat
 };

@@ -1,7 +1,8 @@
 import { createContext, useContext } from "react";
 import { observer, useLocalObservable } from "mobx-react-lite";
-import { Transcription, User } from "../lib/types";
+import { Transcription, Treeview, User } from "../lib/types";
 import UserService from "../services/UserService";
+import DirectoryService from "../services/DirectoryService";
 
 export const createAppStore = (props: any) => {
   return {
@@ -25,7 +26,18 @@ export const createAppStore = (props: any) => {
     },
     logout() {
       UserService.logoutUser();
-    }
+    },
+
+    treeView: props.treeView || null as Treeview | null,
+    setTreeData: async function () {
+      this.treeView = await DirectoryService.getUserTreeview();
+    },
+    
+    // Счётчик для обновления дерева
+    directoryUpdated: 0,
+    notifyDirectoryUpdate: function () {
+      this.directoryUpdated += 1;
+    },
   };
 };
 

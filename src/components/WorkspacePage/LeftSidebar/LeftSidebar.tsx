@@ -13,6 +13,7 @@ import {
   Switch,
   Typography,
   Layout,
+  Input,
 } from "antd";
 import { useModal } from "../../../utils/hooks/useModal";
 import { CreateTranscription } from "../CreateTranscription";
@@ -27,6 +28,7 @@ import {ConfigProvider} from 'antd'
 import { darkSideTheme, lightSideTheme } from "../../../utils/theme";
 import { useAppStore } from "../../../utils/contexts/AppStoreProvider";
 import { observer } from 'mobx-react-lite';
+import DirectoryService from "../../../utils/services/DirectoryService";
 
 type Transcription = {
   id: number;
@@ -48,16 +50,15 @@ type LeftSidebarProps = {
 export const LeftSidebar = observer( ({ authUser }: LeftSidebarProps) => {
   const [isShowingAddTrans, toggleAddTrans] = useModal();
   const [isShowingAddFolder, toggleAddFolder] = useModal();
+  const [isOpenContextMenu, setIsOpenContextMenu] = useState(false);
+
+  const [directoryName, setDirectoryName] = useState<string>('');
+  const { user, notifyDirectoryUpdate } = useAppStore();
 
   const navigate = useNavigate(); 
   const appStore = useAppStore();
   const contextRef = useRef<HTMLInputElement>(null);
-
-  const handleFolderCreated = (refreshTree: () => void) => {
-    refreshTree();
-    toggleAddFolder();
-  }
-
+ 
   const handleClickOutsideContextMenu = (event: any) => {
     if (contextRef.current && !contextRef.current.contains(event.target))
       setIsOpenContextMenu(false);
@@ -70,7 +71,13 @@ export const LeftSidebar = observer( ({ authUser }: LeftSidebarProps) => {
     };
   }, []);
 
-  const [isOpenContextMenu, setIsOpenContextMenu] = useState(false);
+  const handleCreate = async() => {
+    console.log('appStoreUser', user.id)
+    await DirectoryService.createUserDirectory(user.id, directoryName);
+    notifyDirectoryUpdate();
+    toggleAddFolder();
+    setDirectoryName('');
+}
 
   return (
     <ConfigProvider theme={appStore.THEME === true ? darkSideTheme : lightSideTheme}>
@@ -183,7 +190,10 @@ export const LeftSidebar = observer( ({ authUser }: LeftSidebarProps) => {
           onCancel={toggleAddFolder}
           footer={false}
         >
-          <CreateFolder onSuccess={toggleAddFolder} />
+          <Input placeholder="Название папки" className="my-2" value={directoryName} onChange={e => {setDirectoryName(e.target.value)}}/>
+          <Button className="w-full" type="primary" htmlType="submit" onClick={() => handleCreate()}>
+            Создать
+          </Button>
         </Modal>
 
       </Layout>
